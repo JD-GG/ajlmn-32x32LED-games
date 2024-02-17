@@ -1,5 +1,4 @@
 import pygame
-from random import randint
 from mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y, draw_pillars
 import colors as c
 import settings as s
@@ -35,7 +34,7 @@ while run:
         pillar_pos_x[i] -= pillar_vel# Move object based on frames just like the old days
         if pillar_pos_x[i] <= 0 - s.PILLAR_WIDTH:
             pillar_pos_x[i] += (s.PILLAR_WIDTH * s.PILLAR_COUNT) + (s.PILLAR_GAP_WIDTH * s.PILLAR_COUNT)# Reset pillar to the other side
-            pillar_pos_y[i] = get_random_pos_y()#randint(80, 580)# Get new random height
+            pillar_pos_y[i] = get_random_pos_y()# Get new random height
 
     # Drawing
     screen.fill(c.SKY_BLUE)
