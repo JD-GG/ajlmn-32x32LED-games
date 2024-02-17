@@ -1,0 +1,13 @@
+# This file stores setting to be used in all modules.
+# Get a setting by using importName.setting
+
+# All variables that have anything to do with diplaying should be multiples of 20 to represent the actual pixels on the matrix
+SCREEN_WIDTH = 640# The screen has to be seen as 32 20x20 pixels
+SCREEN_HEIGHT = 640
+PLAYER_WIDTH = 40# This is eqvalent to 2 pixels on the matrix
+PILLAR_COUNT = 5
+PILLAR_WIDTH = 60# This is eqvalent to 3 pixels on the matrix
+PILLAR_HEIGHT = 140# This is the gap the bird has to go through
+PILLAR_GAP_WIDTH = 160# This is the horizontal gap between the pillars
+GROUND_HEIGHT = 80
+PIXEL_WIDTH = 20# Single pixel
