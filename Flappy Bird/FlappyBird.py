@@ -33,6 +33,13 @@ lift = -3.5
 
 clock = pygame.time.Clock()
 
+# Draw Ground only once
+screen.fill(c.SKY_BLUE)
+pygame.draw.rect(screen, c.GROUND_BROWN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.GROUND_HEIGHT))# Ground dirt
+pygame.draw.rect(screen, c.LIGHT_GREEN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.PIXEL_WIDTH))# Ground top layer
+changing_screen = (0, 0, s.SCREEN_WIDTH, s.SCREEN_HEIGHT - s.GROUND_HEIGHT)
+pygame.display.flip()
+
 run = True
 while run:
     # Player Physics
@@ -52,8 +59,6 @@ while run:
     draw_pillars(screen, pillar_pos_x, pillar_pos_y)
     pygame.draw.rect(screen, c.FLAPPY_ORANGE, (player_pos_x, player_pos_y, s.PLAYER_WIDTH, s.PLAYER_WIDTH))# Player
     pygame.draw.rect(screen, (255, 0, 0), (player_pos_x, player_pos_y, 5, 5))# Player position (can be removed)
-    pygame.draw.rect(screen, c.GROUND_BROWN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.GROUND_HEIGHT))# Ground dirt
-    pygame.draw.rect(screen, c.LIGHT_GREEN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.PIXEL_WIDTH))# Ground top layer
     pygame.draw.rect(screen, (255, 0, 0), (0, 0, s.PIXEL_WIDTH, s.PIXEL_WIDTH))# Single Pixel for reference (can be removed)
     
     # Input (Has to be changed to gamepad input)
@@ -78,6 +83,6 @@ while run:
             button = event.button
             print(f"Button {button} pressed")
             
-    pygame.display.update()
+    pygame.display.update(changing_screen)# Update everything except the ground
 
 pygame.quit()
