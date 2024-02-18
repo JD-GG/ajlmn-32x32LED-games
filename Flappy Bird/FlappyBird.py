@@ -1,5 +1,6 @@
 import pygame
 from mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y, draw_pillars
+from output import draw_matrix_representation, draw_matrix_grid
 import colors as c
 import settings as s
 
@@ -16,8 +17,12 @@ if num_joysticks > 0:
     joystick.init()
 
 # Setup screen
-screen = pygame.display.set_mode((s.SCREEN_WIDTH, s.SCREEN_HEIGHT))
+screen = pygame.display.set_mode((s.SCREEN_WIDTH*2, s.SCREEN_HEIGHT))
 pygame.display.set_caption("Flappy Bird")
+
+# Setup different screen halfes
+changing_screen = (0, 0, s.SCREEN_WIDTH, s.SCREEN_HEIGHT)
+changing_matrix_screen = (s.SCREEN_WIDTH, 0, s.SCREEN_WIDTH, s.SCREEN_HEIGHT)
 
 # Pilar Variables
 pillar_pos_y = init_pillar_pos_y()
@@ -33,13 +38,6 @@ lift = -3.5
 
 clock = pygame.time.Clock()
 
-# Draw Ground only once
-screen.fill(c.SKY_BLUE)
-pygame.draw.rect(screen, c.GROUND_BROWN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.GROUND_HEIGHT))# Ground dirt
-pygame.draw.rect(screen, c.LIGHT_GREEN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.PIXEL_WIDTH))# Ground top layer
-changing_screen = (0, 0, s.SCREEN_WIDTH, s.SCREEN_HEIGHT - s.GROUND_HEIGHT)
-pygame.display.flip()
-
 run = True
 while run:
     # Player Physics
@@ -54,12 +52,16 @@ while run:
             pillar_pos_x[i] += (s.PILLAR_WIDTH * s.PILLAR_COUNT) + (s.PILLAR_GAP_WIDTH * s.PILLAR_COUNT)# Reset pillar to the other side
             pillar_pos_y[i] = get_random_pos_y()# Get new random height
 
-    # Drawing
+    # Drawing Objects
     screen.fill(c.SKY_BLUE)
     draw_pillars(screen, pillar_pos_x, pillar_pos_y)
     pygame.draw.rect(screen, c.FLAPPY_ORANGE, (player_pos_x, player_pos_y, s.PLAYER_WIDTH, s.PLAYER_WIDTH))# Player
-    pygame.draw.rect(screen, (255, 0, 0), (player_pos_x, player_pos_y, 5, 5))# Player position (can be removed)
-    pygame.draw.rect(screen, (255, 0, 0), (0, 0, s.PIXEL_WIDTH, s.PIXEL_WIDTH))# Single Pixel for reference (can be removed)
+    pygame.draw.rect(screen, c.GROUND_BROWN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.GROUND_HEIGHT))# Ground dirt
+    pygame.draw.rect(screen, c.LIGHT_GREEN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.PIXEL_WIDTH))# Ground top layer
+
+    # Drawing position markers
+    #pygame.draw.rect(screen, (255, 0, 0), (player_pos_x, player_pos_y, 5, 5))# Player position (can be removed)
+    #pygame.draw.rect(screen, (255, 0, 0), (0, 0, s.PIXEL_WIDTH, s.PIXEL_WIDTH))# Single Pixel for reference (can be removed)
     
     # Input (Has to be changed to gamepad input)
     key = pygame.key.get_pressed()
@@ -82,7 +84,10 @@ while run:
             player_vel = lift
             button = event.button
             print(f"Button {button} pressed")
-            
-    pygame.display.update(changing_screen)# Update everything except the ground
+
+    draw_matrix_representation(screen)
+    draw_matrix_grid(screen)
+    pygame.display.update()# Update everything. What is being shown is not what is going to be given to the matrix. 
+
 
 pygame.quit()
