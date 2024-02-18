@@ -25,4 +25,3 @@ def draw_pillars(screen, pillar_pos_x, pillar_pos_y):
         pygame.draw.rect(screen, c.GREEN, (pillar_pos_x[i] + s.PIXEL_WIDTH, 0, s.PIXEL_WIDTH, s.SCREEN_HEIGHT))# Pillar left
         pygame.draw.rect(screen, c.DARK_GREEN, (pillar_pos_x[i] + (s.PIXEL_WIDTH * 2), 0, s.PIXEL_WIDTH, s.SCREEN_HEIGHT))# Pillar left
         pygame.draw.rect(screen, c.SKY_BLUE, (pillar_pos_x[i], pillar_pos_y[i] - s.PILLAR_HEIGHT, s.PILLAR_WIDTH, s.PILLAR_HEIGHT))# Pillar vertical gap
-        pygame.draw.rect(screen, (255, 0, 0), (pillar_pos_x[i], pillar_pos_y[i], 5, 5))# Pillar position (can be removed)

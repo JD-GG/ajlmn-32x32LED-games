@@ -1,5 +1,6 @@
 import pygame
 from mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y, draw_pillars
+from output import draw_matrix_representation, draw_matrix_grid, draw_position_markers
 import colors as c
 import settings as s
 
@@ -43,7 +44,6 @@ while run:
     pygame.draw.rect(screen, (255, 0, 0), (player_pos_x, player_pos_y, 5, 5))# Player position (can be removed)
     pygame.draw.rect(screen, c.GROUND_BROWN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.GROUND_HEIGHT))# Ground dirt
     pygame.draw.rect(screen, c.LIGHT_GREEN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.PIXEL_WIDTH))# Ground top layer
-    pygame.draw.rect(screen, (255, 0, 0), (0, 0, s.PIXEL_WIDTH, s.PIXEL_WIDTH))# Single Pixel for reference (can be removed)
     
     # Input (Has to be changed to gamepad input)
     key = pygame.key.get_pressed()
@@ -62,7 +62,15 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-            
-    pygame.display.update()
+        elif event.type == pygame.JOYBUTTONDOWN:# Handle gamepad Button press
+            player_vel = lift
+            button = event.button
+            print(f"Button {button} pressed")
+
+    draw_matrix_representation(screen)
+    draw_matrix_grid(screen)
+    draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image
+    pygame.display.update()# Update everything. What is being shown is not what is going to be given to the matrix. 
+
 
 pygame.quit()
