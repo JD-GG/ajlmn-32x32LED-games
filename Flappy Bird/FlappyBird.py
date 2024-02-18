@@ -3,8 +3,19 @@ from mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y
 import colors as c
 import settings as s
 
+# Init
 pygame.init()
+pygame.joystick.init()
 
+# Check for available gamepads
+joystick = 0
+num_joysticks = pygame.joystick.get_count()
+if num_joysticks > 0:
+    # Initialize the first gamepad
+    joystick = pygame.joystick.Joystick(0)
+    joystick.init()
+
+# Setup screen
 screen = pygame.display.set_mode((s.SCREEN_WIDTH, s.SCREEN_HEIGHT))
 pygame.display.set_caption("Flappy Bird")
 
@@ -58,10 +69,14 @@ while run:
         player_pos_y = s.SCREEN_HEIGHT - s.PLAYER_WIDTH - s.GROUND_HEIGHT
         player_vel = 0
     
-    # Quit
+    # Event listeners
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        elif event.type == pygame.JOYBUTTONDOWN:# Handle gamepad Button press
+            player_vel = lift
+            button = event.button
+            print(f"Button {button} pressed")
             
     pygame.display.update()
 
