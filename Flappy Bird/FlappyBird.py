@@ -63,7 +63,6 @@ while run:
     #pygame.draw.rect(screen, (255, 0, 0), (player_pos_x, player_pos_y, 5, 5))# Player position (can be removed)
     #pygame.draw.rect(screen, (255, 0, 0), (0, 0, s.PIXEL_WIDTH, s.PIXEL_WIDTH))# Single Pixel for reference (can be removed)
     
-    # Input (Has to be changed to gamepad input)
     key = pygame.key.get_pressed()
     if key[pygame.K_SPACE]:
         player_vel = lift
@@ -74,8 +73,8 @@ while run:
         
     if player_pos_y > s.SCREEN_HEIGHT - s.PLAYER_WIDTH - s.GROUND_HEIGHT:# Bottom (kill player)
         player_pos_y = s.SCREEN_HEIGHT - s.PLAYER_WIDTH - s.GROUND_HEIGHT
-        player_vel = 0
-        pillar_vel = 0
+        player_vel = 0# Kill Player
+        pillar_vel = 0# Stop Pillars
     
     # Event listeners
     for event in pygame.event.get():
