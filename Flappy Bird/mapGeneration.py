@@ -17,7 +17,8 @@ def init_pillar_pos_y():
     return random_pos_y
 
 def get_random_pos_y():
-    return randint(s.PILLAR_HEIGHT + 80, 480)# 80 = 4 pixels; 480 = SCREEN_HEIGHT - GROUND_HEIGHT - 4 PIXELS
+    random_pixel = randint(s.PILLAR_HEIGHT_PIXELS + 4, 32 - s.GROUND_HEIGHT_PIXELS - 4)# PILLAR_HEIGHT + 4 Pixels  ->  SCREEN_HEIGHT - GROUND_HEIGHT - 4 Pixels
+    return random_pixel * s.PIXEL_WIDTH# Returns a height that fits in a 32x32 grid
 
 def draw_pillars(screen, pillar_pos_x, pillar_pos_y):
     for i in range(s.PILLAR_COUNT):
