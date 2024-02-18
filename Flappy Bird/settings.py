@@ -11,3 +11,7 @@ PILLAR_HEIGHT = 140# This is the gap the bird has to go through
 PILLAR_GAP_WIDTH = 160# This is the horizontal gap between the pillars
 GROUND_HEIGHT = 80
 PIXEL_WIDTH = 20# Single pixel
+
+# Calculated Globals (please don't touch)
+PILLAR_HEIGHT_PIXELS = PILLAR_HEIGHT // PIXEL_WIDTH
+GROUND_HEIGHT_PIXELS = GROUND_HEIGHT // PIXEL_WIDTH
