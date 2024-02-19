@@ -70,6 +70,9 @@ while run:
         player_vel = 0# Kill Player
         pillar_vel = 0# Stop Pillars
     
+    # Pillar kolision
+    
+
     # Event listeners
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
