@@ -3,7 +3,17 @@ import Variables as v
 import RGBMatrixEmulator
 
 pygame.init()
+pygame.joystick.init()
 
+# Check for available gamepads
+joystick = 0
+num_joysticks = pygame.joystick.get_count()
+if num_joysticks > 0:
+    # Initialize the first gamepad
+    joystick = pygame.joystick.Joystick(0)
+    joystick.init()
+
+# Setup display
 screen = pygame.display.set_mode((v.SCREEN_WIDTH, v.SCREEN_HEIGHT))
 pygame.display.set_caption("Geometry Dash")
 clock = pygame.time.Clock()
@@ -19,11 +29,9 @@ def PlayerOnGround(player_pos, player_vel, SCREEN_HEIGHT, GROUND, PLAYERSIZE):
 run = True
 while run:
     tickTime = clock.tick(60) / 1000  
-
     v.player_vel += v.gravity * tickTime  
     v.player_pos += v.player_vel
-    
-    v.player_pos, v.player_vel, on_ground = PlayerOnGround(player_pos, player_vel, v.SCREEN_HEIGHT, v.GROUND, v.PLAYERSIZE)
+    v.player_pos, v.player_vel, on_ground = PlayerOnGround(v.player_pos, v.player_vel, v.SCREEN_HEIGHT, v.GROUND, v.PLAYERSIZE)
 
     #Draw
     screen.fill((0, 0, 0))
@@ -33,12 +41,13 @@ while run:
     if on_ground:
         key = pygame.key.get_pressed()
         if key[pygame.K_SPACE]:
-            player_vel = v.lift
-    
+            v.player_vel = v.lift
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-            
-    pygame.display.update()
+        elif event.type == pygame.JOYBUTTONDOWN:# Handle gamepad Button press
+            v.player_vel = v.lift
+            button = event.button #Start=9, X=0, Y=3, A=1, B=2
 
+    pygame.display.update()
 pygame.quit()
