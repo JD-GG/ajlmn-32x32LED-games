@@ -20,15 +20,15 @@ run = True
 while run:
     tickTime = clock.tick(60) / 1000  
 
-    player_vel += v.gravity * tickTime  
-    player_pos += player_vel
+    v.player_vel += v.gravity * tickTime  
+    v.player_pos += v.player_vel
     
-    player_pos, player_vel, on_ground = PlayerOnGround(player_pos, player_vel, v.SCREEN_HEIGHT, v.GROUND, v.PLAYERSIZE)
+    v.player_pos, v.player_vel, on_ground = PlayerOnGround(player_pos, player_vel, v.SCREEN_HEIGHT, v.GROUND, v.PLAYERSIZE)
 
     #Draw
     screen.fill((0, 0, 0))
     pygame.draw.rect(screen, (0, 255, 0), (0, v.SCREEN_HEIGHT - v.GROUND, v.SCREEN_WIDTH, v.GROUND))
-    pygame.draw.rect(screen, (255, 0, 0), (v.PLAYERX, player_pos, v.PLAYERSIZE, v.PLAYERSIZE))
+    pygame.draw.rect(screen, (255, 0, 0), (v.PLAYERX, v.player_pos, v.PLAYERSIZE, v.PLAYERSIZE))
     
     if on_ground:
         key = pygame.key.get_pressed()
