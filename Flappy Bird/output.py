@@ -1,7 +1,7 @@
 import pygame
 import colors as c
 import settings as s
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
+#from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 def draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y):
     screen.fill(c.SKY_BLUE)

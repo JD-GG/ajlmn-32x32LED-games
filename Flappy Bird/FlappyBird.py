@@ -3,11 +3,11 @@ import pygame
 from mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y
 from output import draw_screen, draw_matrix, draw_matrix_representation, draw_matrix_grid, draw_position_markers
 import settings as s
-sys.path.append(r'/home/pi/rpi-rgb-led-matrix/bindings/python')
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
+#sys.path.append(r'/home/pi/rpi-rgb-led-matrix/bindings/python')
+#from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 # Matrix
-matrix = rgbmatrix.RGBMatrix(32, 1, 1)# 32 Pixels, 1 Pannel, 1 => Standard HAT
+#matrix = rgbmatrix.RGBMatrix(32, 1, 1)# 32 Pixels, 1 Pannel, 1 => Standard HAT
 
 # Init
 pygame.init()
@@ -81,7 +81,7 @@ while run:
 
     # Drawing
     draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)
-    draw_matrix(screen, matrix)
+    #draw_matrix(screen, matrix)
     draw_matrix_representation(screen)
     draw_matrix_grid(screen)
     draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image
