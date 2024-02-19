@@ -1,21 +1,10 @@
 import pygame
+import Variables as v
+import RGBMatrixEmulator
 
 pygame.init()
 
-# Screen variables
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-GROUND = 100
-PLAYERSIZE = 50
-PLAYERX = 200
-
-# Player variables
-player_pos = SCREEN_HEIGHT/2
-player_vel = 0
-gravity = 15
-lift = -10
-
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((v.SCREEN_WIDTH, v.SCREEN_HEIGHT))
 pygame.display.set_caption("Geometry Dash")
 clock = pygame.time.Clock()
 
@@ -31,20 +20,20 @@ run = True
 while run:
     tickTime = clock.tick(60) / 1000  
 
-    player_vel += gravity * tickTime  
+    player_vel += v.gravity * tickTime  
     player_pos += player_vel
     
-    player_pos, player_vel, on_ground = PlayerOnGround(player_pos, player_vel, SCREEN_HEIGHT, GROUND, PLAYERSIZE)
+    player_pos, player_vel, on_ground = PlayerOnGround(player_pos, player_vel, v.SCREEN_HEIGHT, v.GROUND, v.PLAYERSIZE)
 
     #Draw
     screen.fill((0, 0, 0))
-    pygame.draw.rect(screen, (0, 255, 0), (0, SCREEN_HEIGHT - GROUND, SCREEN_WIDTH, GROUND))
-    pygame.draw.rect(screen, (255, 0, 0), (PLAYERX, player_pos, PLAYERSIZE, PLAYERSIZE))
+    pygame.draw.rect(screen, (0, 255, 0), (0, v.SCREEN_HEIGHT - v.GROUND, v.SCREEN_WIDTH, v.GROUND))
+    pygame.draw.rect(screen, (255, 0, 0), (v.PLAYERX, player_pos, v.PLAYERSIZE, v.PLAYERSIZE))
     
     if on_ground:
         key = pygame.key.get_pressed()
         if key[pygame.K_SPACE]:
-            player_vel = lift
+            player_vel = v.lift
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
