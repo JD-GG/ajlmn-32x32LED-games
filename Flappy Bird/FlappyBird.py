@@ -1,8 +1,12 @@
+import sys
 import pygame
-from mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y, draw_pillars
-from output import draw_matrix_representation, draw_matrix_grid, draw_position_markers
-import colors as c
+from mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y
+from output import draw_screen, draw_matrix, draw_matrix_representation, draw_matrix_grid, draw_position_markers
 import settings as s
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
+
+# Matrix
+matrix = rgbmatrix.RGBMatrix(32, 1, 1)# 32 Pixels, 1 Pannel, 1 => Standard HAT
 
 # Init
 pygame.init()
@@ -51,14 +55,7 @@ while run:
         if pillar_pos_x[i] <= 0 - s.PILLAR_WIDTH:
             pillar_pos_x[i] += (s.PILLAR_WIDTH * s.PILLAR_COUNT) + (s.PILLAR_GAP_WIDTH * s.PILLAR_COUNT)# Reset pillar to the other side
             pillar_pos_y[i] = get_random_pos_y()# Get new random height
-
-    # Drawing Objects
-    screen.fill(c.SKY_BLUE)
-    draw_pillars(screen, pillar_pos_x, pillar_pos_y)
-    pygame.draw.rect(screen, c.FLAPPY_ORANGE, (player_pos_x, player_pos_y, s.PLAYER_WIDTH, s.PLAYER_WIDTH))# Player
-    pygame.draw.rect(screen, c.GROUND_BROWN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.GROUND_HEIGHT))# Ground dirt
-    pygame.draw.rect(screen, c.LIGHT_GREEN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.PIXEL_WIDTH))# Ground top layer
-    
+ 
     key = pygame.key.get_pressed()
     if key[pygame.K_SPACE]:
         player_vel = lift
@@ -81,6 +78,9 @@ while run:
             button = event.button
             print(f"Button {button} pressed")
 
+    # Drawing
+    draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)
+    draw_matrix(screen, matrix)
     draw_matrix_representation(screen)
     draw_matrix_grid(screen)
     draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image
