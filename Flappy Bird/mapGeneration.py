@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import pygame
 from random import randint
 import colors as c

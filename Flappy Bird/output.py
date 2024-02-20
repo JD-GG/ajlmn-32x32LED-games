@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import pygame
 import colors as c
 import settings as s

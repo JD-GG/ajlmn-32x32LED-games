@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # This file defines standard colors than can be used by any module using importName.color
 FLAPPY_ORANGE = (245, 174, 49)
 SKY_BLUE = (112, 200, 205)
