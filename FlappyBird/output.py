@@ -16,7 +16,7 @@ def draw_matrix(screen, matrix, offset_canvas):
         for x in range(32):
             color = screen.get_at((x, y))# get color in format (r, g, b, t)            
             offset_canvas.SetPixel(x, y, color[0], color[1], color[2])
-            offset_canvas = matrix.SwapOnVSync(offset_canvas)
+    offset_canvas = matrix.SwapOnVSync(offset_canvas)
 
 def draw_pillars(screen, pillar_pos_x, pillar_pos_y):
     for i in range(s.PILLAR_COUNT):
