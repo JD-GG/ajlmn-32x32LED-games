@@ -91,7 +91,7 @@ while run:
 
     # Drawing
     draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)
-    draw_matrix(screen, matrix, offset_canvas)
+    offset_canvas = draw_matrix(screen, matrix, offset_canvas)
     draw_matrix_representation(screen)
     draw_matrix_grid(screen)
     draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image
