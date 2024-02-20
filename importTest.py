@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#! /usr/bin/env python3
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 # Configuration for the matrix

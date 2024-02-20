@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#! /usr/bin/env python3
 # This file stores setting to be used in all modules.
 # Get a setting by using importName.setting
 
