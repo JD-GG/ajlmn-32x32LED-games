@@ -18,4 +18,3 @@ for y in range(32):
         offset_canvas = matrix.SwapOnVSync(offset_canvas)
 
 # Run with sudo ./importTest.py after chmod +x importTest.py
-# chmod should not modify the file in any way tho
