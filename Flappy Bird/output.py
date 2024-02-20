@@ -10,12 +10,12 @@ def draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y):
     pygame.draw.rect(screen, c.GROUND_BROWN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.GROUND_HEIGHT))# Ground dirt
     pygame.draw.rect(screen, c.LIGHT_GREEN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.PIXEL_WIDTH))# Ground top layer
 
-def draw_matrix(screen, matrix):
+def draw_matrix(screen, matrix, offset_canvas):
     for y in range(32):
         for x in range(32):
-            color_rgba = screen.get_at((x, y))# get color in format (r, g, b, t)
-            color_rgb = color_rgba[:3]# Cut the alpha channel of
-            matrix.SetPixel(x, y, color_rgb)
+            color = screen.get_at((x, y))# get color in format (r, g, b, t)            
+            offset_canvas.SetPixel(x, y, color[0], color[1], color[2])
+            offset_canvas = matrix.SwapOnVSync(offset_canvas)
 
 def draw_pillars(screen, pillar_pos_x, pillar_pos_y):
     for i in range(s.PILLAR_COUNT):

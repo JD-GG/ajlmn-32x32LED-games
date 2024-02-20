@@ -1,13 +1,21 @@
+#!/usr/bin/env python
 import sys
 import pygame
 from mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y
 from output import draw_screen, draw_matrix, draw_matrix_representation, draw_matrix_grid, draw_position_markers
 import settings as s
-#sys.path.append(r'/home/pi/rpi-rgb-led-matrix/bindings/python')
-#from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
+
+# Configuration for the matrix
+options = RGBMatrixOptions()
+options.rows = 32
+options.chain_length = 1
+options.parallel = 1
+options.hardware_mapping = 'adafruit-hat'# Important don't forget
 
 # Matrix
-#matrix = rgbmatrix.RGBMatrix(32, 1, 1)# 32 Pixels, 1 Pannel, 1 => Standard HAT
+matrix = RGBMatrix(options = options)
+offset_canvas = matrix.CreateFrameCanvas()
 
 # Init
 pygame.init()
