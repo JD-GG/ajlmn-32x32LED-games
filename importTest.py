@@ -12,7 +12,7 @@ matrix = RGBMatrix(options = options)
 
 for y in range(32):
     for x in range(32):
-        matrix.SetPixel(x, y, (255, 0, 0))
+        matrix.SetPixel(x, y, 255, 0, 0)
         matrix.SwapOnVsync()
 
 # Run with sudo ./importTest.py after chmod +x importTest.py
