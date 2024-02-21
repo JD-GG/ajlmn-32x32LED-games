@@ -14,7 +14,9 @@ def draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y):
 def draw_matrix(screen, matrix, offset_canvas):
     for y in range(32):
         for x in range(32):
-            color = screen.get_at((x, y))# get color in format (r, g, b, t)            
+            pos_x = x * s.PIXEL_WIDTH
+            pos_y = y * s.PIXEL_WIDTH
+            color = screen.get_at((pos_x, pos_y))# get color in format (r, g, b, t)            
             offset_canvas.SetPixel(x, y, color[0], color[1], color[2])
     return matrix.SwapOnVSync(offset_canvas)
 
