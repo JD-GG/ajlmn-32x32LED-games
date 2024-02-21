@@ -33,7 +33,6 @@ def draw_matrix_representation(screen):
             pos_x = x * s.PIXEL_WIDTH
             pos_y = y * s.PIXEL_WIDTH
             color = screen.get_at((pos_x, pos_y))# get color in format (r, g, b, t)
-            # set pixel or something idk
             pygame.draw.rect(screen, color, (pos_x + s.SCREEN_WIDTH, pos_y, s.PIXEL_WIDTH, s.PIXEL_WIDTH))# Single Pixel representation
 
     pygame.draw.rect(screen, (0, 0, 0), (s.SCREEN_WIDTH, 0, 1, s.SCREEN_HEIGHT))# Seperating line

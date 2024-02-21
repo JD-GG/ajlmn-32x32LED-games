@@ -10,9 +10,9 @@ options = RGBMatrixOptions()
 options.rows = 32
 options.chain_length = 1
 options.parallel = 1
-options.hardware_mapping = 'adafruit-hat'# Important don't forget
+options.hardware_mapping = 'adafruit-hat'
 
-# Matrix
+# Matrix & Canvas
 matrix = RGBMatrix(options = options)
 offset_canvas = matrix.CreateFrameCanvas()
 
