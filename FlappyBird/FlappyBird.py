@@ -1,9 +1,9 @@
-#! /usr/bin/env python3
+##! /usr/bin/env python3
 import pygame
 from mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y
 from output import draw_screen, draw_matrix, draw_matrix_representation, draw_matrix_grid, draw_position_markers
 import settings as s
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
+"""from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 # Configuration for the matrix
 options = RGBMatrixOptions()
@@ -14,7 +14,7 @@ options.hardware_mapping = 'adafruit-hat'
 
 # Matrix & Canvas
 matrix = RGBMatrix(options = options)
-offset_canvas = matrix.CreateFrameCanvas()
+offset_canvas = matrix.CreateFrameCanvas()"""
 
 # Init
 pygame.init()
@@ -91,7 +91,7 @@ while run:
 
     # Drawing
     draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)
-    offset_canvas = draw_matrix(screen, matrix, offset_canvas)
+    #offset_canvas = draw_matrix(screen, matrix, offset_canvas)
     draw_matrix_representation(screen)
     draw_matrix_grid(screen)
     draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image

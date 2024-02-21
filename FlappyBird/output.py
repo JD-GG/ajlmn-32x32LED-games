@@ -2,7 +2,7 @@
 import pygame
 import colors as c
 import settings as s
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
+#from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 def draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y):
     screen.fill(c.SKY_BLUE)
@@ -15,8 +15,8 @@ def draw_matrix(screen, matrix, offset_canvas):
     for y in range(32):
         for x in range(32):
             color = screen.get_at((x, y))# get color in format (r, g, b, t)            
-            offset_canvas.SetPixel(x, y, color[0], color[1], color[2])
-    return matrix.SwapOnVSync(offset_canvas)
+            #offset_canvas.SetPixel(x, y, color[0], color[1], color[2])
+    #return matrix.SwapOnVSync(offset_canvas)
 
 def draw_pillars(screen, pillar_pos_x, pillar_pos_y):
     for i in range(s.PILLAR_COUNT):
