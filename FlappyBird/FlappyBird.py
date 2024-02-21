@@ -11,7 +11,7 @@ options.rows = 32
 options.chain_length = 1
 options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'
-options.brightness = 100
+options.brightness = 1
 
 # Matrix & Canvas
 matrix = RGBMatrix(options = options)
