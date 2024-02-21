@@ -23,6 +23,8 @@ pygame.joystick.init()
 # Check for available gamepads
 joystick = 0
 num_joysticks = pygame.joystick.get_count()
+if num_joysticks == 0:
+    print("No gamepad detected.")
 if num_joysticks > 0:
     # Initialize the first gamepad
     joystick = pygame.joystick.Joystick(0)
