@@ -21,14 +21,13 @@ pygame.init()
 pygame.joystick.init()
 
 # Check for available gamepads
-joystick = 0
-num_joysticks = pygame.joystick.get_count()
-if num_joysticks == 0:
-    print("No gamepad detected.")
-if num_joysticks > 0:
-    # Initialize the first gamepad
-    joystick = pygame.joystick.Joystick(0)
+joysticks = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())]
+if not joysticks:
+    print("No gamepads detected. Exiting.")
+
+for joystick in joysticks:
     joystick.init()
+    print(f"Detected Gamepad: {joystick.get_name()}")
 
 # Setup screen
 screen = pygame.display.set_mode((s.SCREEN_WIDTH*2, s.SCREEN_HEIGHT))
