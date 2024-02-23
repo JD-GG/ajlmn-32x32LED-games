@@ -17,4 +17,4 @@ for y in range(32):
         offset_canvas.SetPixel(x, y, 255, 0, 0)
         offset_canvas = matrix.SwapOnVSync(offset_canvas)
 
-# Run with sudo ./importTest.py after chmod +x importTest.py
+# Run with sudo python3 matrixTest.py
