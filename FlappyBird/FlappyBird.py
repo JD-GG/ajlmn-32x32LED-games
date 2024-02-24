@@ -11,6 +11,7 @@ options.rows = 32
 options.chain_length = 1
 options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'
+options.drop_privileges = 1# Random Python guy said this would help
 
 # Matrix & Canvas
 matrix = RGBMatrix(options = options)
@@ -21,12 +22,13 @@ pygame.init()
 pygame.joystick.init()
 
 # Check for available gamepads
-joystick = 0
-num_joysticks = pygame.joystick.get_count()
-if num_joysticks > 0:
-    # Initialize the first gamepad
-    joystick = pygame.joystick.Joystick(0)
+joysticks = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())]
+if not joysticks:
+    print("No gamepads detected. Exiting.")
+
+for joystick in joysticks:
     joystick.init()
+    print(f"Detected Gamepad: {joystick.get_name()}")
 
 # Setup screen
 screen = pygame.display.set_mode((s.SCREEN_WIDTH*2, s.SCREEN_HEIGHT))
@@ -74,8 +76,8 @@ while run:
         
     if player_pos_y > s.SCREEN_HEIGHT - s.PLAYER_WIDTH - s.GROUND_HEIGHT:# Bottom (kill player)
         player_pos_y = s.SCREEN_HEIGHT - s.PLAYER_WIDTH - s.GROUND_HEIGHT
-        player_vel = 0# Kill Player
-        pillar_vel = 0# Stop Pillars
+        #player_vel = 0# Kill Player
+        #pillar_vel = 0# Stop Pillars
     
     # Pillar kolision
     
@@ -95,6 +97,6 @@ while run:
     draw_matrix_representation(screen)
     draw_matrix_grid(screen)
     draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image
-    pygame.display.update()# Update everything. What is being shown is not what is going to be given to the matrix. 
+    #pygame.display.update()# Update everything. What is being shown is not what is going to be given to the matrix. 
 
 pygame.quit()
