@@ -1,5 +1,6 @@
 ##! /usr/bin/env python3
 import pygame
+from pygame.locals import *
 from mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y
 from output import draw_screen, draw_matrix, draw_matrix_representation, draw_matrix_grid, draw_position_markers
 import settings as s
@@ -65,10 +66,6 @@ while run:
         if pillar_pos_x[i] <= 0 - s.PILLAR_WIDTH:
             pillar_pos_x[i] += (s.PILLAR_WIDTH * s.PILLAR_COUNT) + (s.PILLAR_GAP_WIDTH * s.PILLAR_COUNT)# Reset pillar to the other side
             pillar_pos_y[i] = get_random_pos_y()# Get new random height
- 
-    key = pygame.key.get_pressed()
-    if key[pygame.K_SPACE]:
-        player_vel = lift
     
     # Edgecases
     if player_pos_y < 0:# Top
@@ -76,8 +73,9 @@ while run:
         
     if player_pos_y > s.SCREEN_HEIGHT - s.PLAYER_WIDTH - s.GROUND_HEIGHT:# Bottom (kill player)
         player_pos_y = s.SCREEN_HEIGHT - s.PLAYER_WIDTH - s.GROUND_HEIGHT
-        #player_vel = 0# Kill Player
-        #pillar_vel = 0# Stop Pillars
+        player_vel = 0# Kill Player
+        lift = 0# Disable Flight
+        pillar_vel = 0# Stop Pillars
     
     # Pillar kolision
     
@@ -86,6 +84,9 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        elif event.type == pygame.KEYDOWN and event.key == K_SPACE:
+            player_vel = lift
+            score += 1# This has to be changed
         elif event.type == pygame.JOYBUTTONDOWN:# Handle gamepad Button press
             player_vel = lift
             button = event.button
