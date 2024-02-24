@@ -2,14 +2,17 @@
 import pygame
 import colors as c
 import settings as s
+import numbers as n
 #from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
-def draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y):
+def draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score):
     screen.fill(c.SKY_BLUE)
     draw_pillars(screen, pillar_pos_x, pillar_pos_y)
     pygame.draw.rect(screen, c.FLAPPY_ORANGE, (player_pos_x, player_pos_y, s.PLAYER_WIDTH, s.PLAYER_WIDTH))# Player
     pygame.draw.rect(screen, c.GROUND_BROWN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.GROUND_HEIGHT))# Ground dirt
     pygame.draw.rect(screen, c.LIGHT_GREEN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.PIXEL_WIDTH))# Ground top layer
+    draw_score(screen, score)
+
 
 def draw_matrix(screen, matrix, offset_canvas):
     for y in range(32):
@@ -18,7 +21,7 @@ def draw_matrix(screen, matrix, offset_canvas):
             pos_y = y * s.PIXEL_WIDTH
             color = screen.get_at((pos_x, pos_y))# get color in format (r, g, b, t)            
             offset_canvas.SetPixel(x, y, color[0], color[1], color[2])
-    return matrix.SwapOnVSync(offset_canvas)
+    #return matrix.SwapOnVSync(offset_canvas)
 
 # This serves to represent how the game will actually look on the matrix in the window
 def draw_matrix_representation(screen):
@@ -52,3 +55,21 @@ def draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pill
     for i in range(s.PILLAR_COUNT):
         if pillar_pos_x[i] < s.SCREEN_WIDTH:
             pygame.draw.rect(screen, (255, 0, 0), (pillar_pos_x[i], pillar_pos_y[i], 5, 5))# Pillar position
+
+# This draws the score on the screen
+# Slightly optimized to perfrom less drawing operations
+def draw_score(screen, number):
+    if number > 99:
+        number = 99# Overflow
+    number_left = number // 10# Get tens place
+    number_right = number - (number_left * 10)# Get ones place
+    
+    for i in range(5):
+        for j in range(3):
+            left_pos_x = s.SCORE_POSITION_X + (j * s.PIXEL_WIDTH)
+            right_pos_x = left_pos_x + (5 * s.PIXEL_WIDTH)
+            pos_y = s.SCORE_POSITION_Y + (i * s.PIXEL_WIDTH)
+            if(n.SCORE[number_left][i][j]):
+                pygame.draw.rect(screen, c.WHITE, (left_pos_x, pos_y, s.PIXEL_WIDTH, s.PIXEL_WIDTH))# Left Number
+            if(n.SCORE[number_right][i][j]):
+                pygame.draw.rect(screen, c.WHITE, (right_pos_x, pos_y, s.PIXEL_WIDTH, s.PIXEL_WIDTH))# Right Number

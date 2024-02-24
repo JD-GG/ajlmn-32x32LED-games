@@ -17,7 +17,6 @@ options.drop_privileges = 1# Random Python guy said this would help
 # Matrix & Canvas
 matrix = RGBMatrix(options = options)
 offset_canvas = matrix.CreateFrameCanvas()"""
-
 # Init
 pygame.init()
 pygame.joystick.init()
@@ -51,7 +50,11 @@ player_vel = 0
 gravity = 15
 lift = -3.5
 
+# CLOCK
 clock = pygame.time.Clock()
+
+# SCORE
+score = 0
 
 run = True
 while run:
@@ -79,6 +82,7 @@ while run:
     
     # Pillar kolision
     
+    # Score increment
 
     # Event listeners
     for event in pygame.event.get():
@@ -93,11 +97,11 @@ while run:
             print(f"Button {button} pressed")
 
     # Drawing
-    draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)
+    draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score)
     #offset_canvas = draw_matrix(screen, matrix, offset_canvas)
     draw_matrix_representation(screen)
     draw_matrix_grid(screen)
     draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image
-    #pygame.display.update()# Update everything. What is being shown is not what is going to be given to the matrix. 
+    pygame.display.update()# Update everything. What is being shown is not what is going to be given to the matrix. 
 
 pygame.quit()
