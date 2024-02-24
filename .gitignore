@@ -1,6 +1,3 @@
-# RGB Matrix library
-rpi-rgb-led-matrix/
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
