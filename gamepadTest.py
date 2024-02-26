@@ -27,7 +27,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        if event.type == pygame.JOYBUTTONDOWN:
+        elif event.type == pygame.JOYBUTTONDOWN:
             joystick_id = event.joy
             button_id = event.button
             print(f"Gamepad {joystick_id + 1} - Button {button_id} pressed")
