@@ -27,7 +27,9 @@ offset_canvas = matrix.SwapOnVSync(offset_canvas)
 
 # Init
 pygame.init()
+print("pygame initialized")
 pygame.joystick.init()
+print("joystick initialized")
 
 # Check for available gamepads
 joysticks = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())]
