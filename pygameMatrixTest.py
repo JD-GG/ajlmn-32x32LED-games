@@ -22,6 +22,7 @@ for y in range(32):
 
 offset_canvas.Clear()
 offset_canvas = matrix.SwapOnVSync(offset_canvas)
+print("output red")
 
 #-------------------------------Detect gampeads after matrix test-------------------------------------------
 
@@ -42,11 +43,14 @@ for joystick in joysticks:
 
 # Setup screen
 screen = pygame.display.set_mode((640, 640))
+print("screen set mode")
 pygame.display.set_caption("Screen Test")
+print("screen set caption")
 
 # Main loop for testing gamepads
 running = True
 clock = pygame.time.Clock()
+print("clock initialized")
 
 #-------------------------------Test Matrix during pygame-------------------------------------------
 for y in range(32):
@@ -56,7 +60,7 @@ for y in range(32):
 
 offset_canvas.Clear()
 offset_canvas = matrix.SwapOnVSync(offset_canvas)
-
+print("output green")
 
 while running:
     for event in pygame.event.get():
