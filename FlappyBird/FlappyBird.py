@@ -11,7 +11,7 @@ options.rows = 32
 options.chain_length = 1
 options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'
-options.drop_privileges = 1# Random Python guy said this would help
+options.drop_privileges = 0# DONT DROP PRIVS!!!
 
 # Matrix & Canvas
 matrix = RGBMatrix(options = options)
