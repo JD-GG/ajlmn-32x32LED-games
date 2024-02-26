@@ -9,7 +9,7 @@ options.rows = 32
 options.chain_length = 1
 options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'# Important don't forget
-options.drop_privileges = 1# Random Python guy said this would help
+options.drop_privileges = 0# Random Python guy said this would help
 
 matrix = RGBMatrix(options = options)
 
