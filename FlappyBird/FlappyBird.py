@@ -6,6 +6,7 @@ from mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y
 from output import draw_screen, draw_matrix, draw_matrix_representation, draw_matrix_grid, draw_position_markers
 import settings as s
 
+# Capture Gamepad input if not in focus
 os.environ["SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS"] = "1"
 
 """from rgbmatrix import RGBMatrix, RGBMatrixOptions
