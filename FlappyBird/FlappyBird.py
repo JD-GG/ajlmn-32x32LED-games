@@ -52,7 +52,7 @@ player_pos_x = 80
 player_pos_y = 80
 player_vel = 0
 gravity = 15
-lift = -5
+lift = -6
 
 clock = pygame.time.Clock()
 

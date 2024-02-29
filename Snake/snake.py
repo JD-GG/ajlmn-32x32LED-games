@@ -13,7 +13,8 @@ pygame.display.set_caption("Flappy Bird")
 player_pos = [100, 320]
 player_vel = 0
 gravity = 15
-lift = -6
+lift = -7
+speed = 5
 
 clock = pygame.time.Clock()
 
@@ -27,9 +28,15 @@ while run:
     screen.fill((0, 0, 0))
     pygame.draw.rect(screen, (255, 0, 0), (player_pos[0], player_pos[1], BIRD_SIZE, BIRD_SIZE))
     
-    key = pygame.key.get_pressed()
-    if key[pygame.K_SPACE]:
-        player_vel = lift
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        rect.move_ip(-speed, 0)
+    if keys[pygame.K_RIGHT]:
+        rect.move_ip(speed, 0)
+    if keys[pygame.K_UP]:
+        rect.move_ip(0, -speed)
+    if keys[pygame.K_DOWN]:
+        rect.move_ip(0, speed)
     
     if player_pos[1] < 0:
         player_pos[1] = 0
