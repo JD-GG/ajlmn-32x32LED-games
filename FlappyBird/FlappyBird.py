@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 import os
 import pygame
+from pygame.locals import *
 from mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y
 from output import draw_screen, draw_matrix, draw_matrix_representation, draw_matrix_grid, draw_position_markers
 import settings as s
@@ -20,7 +21,6 @@ options.drop_privileges = 0# DONT DROP PRIVS!!!
 # Matrix & Canvas
 matrix = RGBMatrix(options = options)
 offset_canvas = matrix.CreateFrameCanvas()
-
 # Init
 pygame.init()
 pygame.joystick.init()
@@ -54,7 +54,11 @@ player_vel = 0
 gravity = 15
 lift = -6
 
+# Additional variables (self explanatory)
 clock = pygame.time.Clock()
+score = 0
+Rect = pygame.Rect# Collsision hitbox
+enable_input = True
 
 run = True
 while run:
@@ -69,10 +73,6 @@ while run:
         if pillar_pos_x[i] <= 0 - s.PILLAR_WIDTH:
             pillar_pos_x[i] += (s.PILLAR_WIDTH * s.PILLAR_COUNT) + (s.PILLAR_GAP_WIDTH * s.PILLAR_COUNT)# Reset pillar to the other side
             pillar_pos_y[i] = get_random_pos_y()# Get new random height
- 
-    key = pygame.key.get_pressed()
-    if key[pygame.K_SPACE]:
-        player_vel = lift
     
     # Edgecases
     if player_pos_y < 0:# Top
@@ -80,27 +80,47 @@ while run:
         
     if player_pos_y > s.SCREEN_HEIGHT - s.PLAYER_WIDTH - s.GROUND_HEIGHT:# Bottom (kill player)
         player_pos_y = s.SCREEN_HEIGHT - s.PLAYER_WIDTH - s.GROUND_HEIGHT
-        #player_vel = 0# Kill Player
-        #pillar_vel = 0# Stop Pillars
+        pillar_vel = 0# Stop Pillars
+        enable_input = False# Disable input
     
     # Pillar kolision
+    player_rect = Rect(player_pos_x, player_pos_y, s.PLAYER_WIDTH, s.PILLAR_WIDTH)
+    
+    for i in range(s.PILLAR_COUNT):
+        pillar_top_height_y = pillar_pos_y[i] - s.PILLAR_HEIGHT
+        pillar_bottom_height = s.SCREEN_HEIGHT - pillar_pos_y[i]
+        pillar_rect_top = Rect(pillar_pos_x[i], 0, s.PILLAR_WIDTH, pillar_top_height_y )
+        pillar_rect_bottom = Rect(pillar_pos_x[i], pillar_pos_y[i], s.PILLAR_WIDTH, pillar_bottom_height )
+         
+        if player_rect.colliderect(pillar_rect_bottom):
+            pillar_vel = 0
+            enable_input = False# Disable input
+        elif player_rect.colliderect(pillar_rect_top):
+            pillar_vel = 0 
+            enable_input = False# Disable input
+
+    # Score increment
     
 
     # Event listeners
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-        elif event.type == pygame.JOYBUTTONDOWN:# Handle gamepad Button press
+        elif event.type == pygame.KEYDOWN and event.key == K_SPACE and enable_input:
+            player_vel = lift
+            score += 1# This has to be changed
+        elif event.type == pygame.JOYBUTTONDOWN and enable_input:# Handle gamepad Button press
             player_vel = lift
             button = event.button
             print(f"Button {button} pressed")
 
     # Drawing
-    draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)
+    draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score)
     offset_canvas = draw_matrix(screen, matrix, offset_canvas)
     draw_matrix_representation(screen)
     draw_matrix_grid(screen)
     draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image
-    #pygame.display.update()# Update everything. What is being shown is not what is going to be given to the matrix. 
+    
+    pygame.display.update()# Update everything. What is being shown is not what is going to be given to the matrix. 
 
 pygame.quit()
