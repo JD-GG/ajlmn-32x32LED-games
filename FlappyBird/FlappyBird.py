@@ -88,10 +88,10 @@ while run:
          pillar_rect_bottom = Rect(pillar_pos_x[i], pillar_pos_y[i], s.PILLAR_WIDTH, pillar_bottom_height )
          
          if player_rect.colliderect(pillar_rect_bottom):
-             player_vel = 0# Kill Player
+             lift = 0# Kill Player
              pillar_vel = 0
          elif player_rect.colliderect(pillar_rect_top):
-             player_vel = 0# Kill Player
+             lift = 0# Kill Player
              pillar_vel = 0 
 
     # Event listeners
