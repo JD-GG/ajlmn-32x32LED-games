@@ -81,7 +81,6 @@ while run:
         
     if player_pos_y > s.SCREEN_HEIGHT - s.PLAYER_WIDTH - s.GROUND_HEIGHT:# Bottom (kill player)
         player_pos_y = s.SCREEN_HEIGHT - s.PLAYER_WIDTH - s.GROUND_HEIGHT
-        player_vel = 0# Kill Player
         lift = 0# Disable Flight
         pillar_vel = 0# Stop Pillars
     
