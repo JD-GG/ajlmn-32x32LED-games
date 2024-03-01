@@ -3,7 +3,7 @@ import pygame
 import colors as c
 import settings as s
 import numbers as n
-#from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 def draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score):
     screen.fill(c.SKY_BLUE)
@@ -21,7 +21,7 @@ def draw_matrix(screen, matrix, offset_canvas):
             pos_y = y * s.PIXEL_WIDTH
             color = screen.get_at((pos_x, pos_y))# get color in format (r, g, b, t)            
             offset_canvas.SetPixel(x, y, color[0], color[1], color[2])
-    #return matrix.SwapOnVSync(offset_canvas)
+    return matrix.SwapOnVSync(offset_canvas)
 
 # This serves to represent how the game will actually look on the matrix in the window
 def draw_matrix_representation(screen):
