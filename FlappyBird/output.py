@@ -6,7 +6,7 @@ import numbers as n
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 def draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score):
-    screen.fill(c.SKY_BLUE)
+    screen.fill(c.DARK_SKY_BLUE)
     draw_pillars(screen, pillar_pos_x, pillar_pos_y)
     pygame.draw.rect(screen, c.FLAPPY_ORANGE, (player_pos_x, player_pos_y, s.PLAYER_WIDTH, s.PLAYER_WIDTH))# Player
     pygame.draw.rect(screen, c.GROUND_BROWN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.GROUND_HEIGHT))# Ground dirt
@@ -38,7 +38,7 @@ def draw_pillars(screen, pillar_pos_x, pillar_pos_y):
         pygame.draw.rect(screen, c.LIGHT_GREEN, (pillar_pos_x[i], 0, s.PIXEL_WIDTH, s.SCREEN_HEIGHT))# Pillar left
         pygame.draw.rect(screen, c.GREEN, (pillar_pos_x[i] + s.PIXEL_WIDTH, 0, s.PIXEL_WIDTH, s.SCREEN_HEIGHT))# Pillar center
         pygame.draw.rect(screen, c.DARK_GREEN, (pillar_pos_x[i] + (s.PIXEL_WIDTH * 2), 0, s.PIXEL_WIDTH, s.SCREEN_HEIGHT))# Pillar right
-        pygame.draw.rect(screen, c.SKY_BLUE, (pillar_pos_x[i], pillar_pos_y[i] - s.PILLAR_HEIGHT, s.PILLAR_WIDTH, s.PILLAR_HEIGHT))# Pillar vertical gap
+        pygame.draw.rect(screen, c.DARK_SKY_BLUE, (pillar_pos_x[i], pillar_pos_y[i] - s.PILLAR_HEIGHT, s.PILLAR_WIDTH, s.PILLAR_HEIGHT))# Pillar vertical gap
 
 # This helps to understand wich pixels get shown on the matrix
 def draw_matrix_grid(screen):
