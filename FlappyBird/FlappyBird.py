@@ -1,11 +1,11 @@
-#! /usr/bin/env python3
+##! /usr/bin/env python3
 import os
 import pygame
 from pygame.locals import *
 from mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y
 from output import draw_screen, draw_matrix, draw_matrix_representation, draw_matrix_grid, draw_position_markers
 import settings as s
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
+"""from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 # This makes it so that gampad input can be used if window is no in focus
 os.environ["SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS"] = "1"
@@ -20,7 +20,8 @@ options.drop_privileges = 0# DONT DROP PRIVS!!!
 
 # Matrix & Canvas
 matrix = RGBMatrix(options = options)
-offset_canvas = matrix.CreateFrameCanvas()
+offset_canvas = matrix.CreateFrameCanvas()"""
+
 # Init
 pygame.init()
 pygame.joystick.init()
@@ -100,7 +101,8 @@ while run:
             enable_input = False# Disable input
 
     # Score increment
-    
+    if False:
+        score += 1# Increment score
 
     # Event listeners
     for event in pygame.event.get():
@@ -116,7 +118,7 @@ while run:
 
     # Drawing
     draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score)
-    offset_canvas = draw_matrix(screen, matrix, offset_canvas)
+    # offset_canvas = draw_matrix(screen, matrix, offset_canvas)
     draw_matrix_representation(screen)
     draw_matrix_grid(screen)
     draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image
