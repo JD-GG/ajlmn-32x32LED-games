@@ -100,6 +100,9 @@ while run:
             pillar_vel = 0 
             enable_input = False# Disable input
 
+    # Score increment
+    
+
     # Event listeners
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
