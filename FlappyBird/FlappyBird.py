@@ -81,33 +81,33 @@ while run:
         
     if player_pos_y > s.SCREEN_HEIGHT - s.PLAYER_WIDTH - s.GROUND_HEIGHT:# Bottom (kill player)
         player_pos_y = s.SCREEN_HEIGHT - s.PLAYER_WIDTH - s.GROUND_HEIGHT
-        lift = 0# Disable Flight
         pillar_vel = 0# Stop Pillars
+        enable_input = False# Disable input
     
     # Pillar kolision
     player_rect = Rect(player_pos_x, player_pos_y, s.PLAYER_WIDTH, s.PILLAR_WIDTH)
     
     for i in range(s.PILLAR_COUNT):
-         pillar_top_height_y = pillar_pos_y[i] - s.PILLAR_HEIGHT
-         pillar_bottom_height = s.SCREEN_HEIGHT - pillar_pos_y[i]
-         pillar_rect_top = Rect(pillar_pos_x[i], 0, s.PILLAR_WIDTH, pillar_top_height_y )
-         pillar_rect_bottom = Rect(pillar_pos_x[i], pillar_pos_y[i], s.PILLAR_WIDTH, pillar_bottom_height )
+        pillar_top_height_y = pillar_pos_y[i] - s.PILLAR_HEIGHT
+        pillar_bottom_height = s.SCREEN_HEIGHT - pillar_pos_y[i]
+        pillar_rect_top = Rect(pillar_pos_x[i], 0, s.PILLAR_WIDTH, pillar_top_height_y )
+        pillar_rect_bottom = Rect(pillar_pos_x[i], pillar_pos_y[i], s.PILLAR_WIDTH, pillar_bottom_height )
          
-         if player_rect.colliderect(pillar_rect_bottom):
-             lift = 0# Kill Player
-             pillar_vel = 0
-         elif player_rect.colliderect(pillar_rect_top):
-             lift = 0# Kill Player
-             pillar_vel = 0 
+        if player_rect.colliderect(pillar_rect_bottom):
+            pillar_vel = 0
+            enable_input = False# Disable input
+        elif player_rect.colliderect(pillar_rect_top):
+            pillar_vel = 0 
+            enable_input = False# Disable input
 
     # Event listeners
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-        elif event.type == pygame.KEYDOWN and event.key == K_SPACE:
+        elif event.type == pygame.KEYDOWN and event.key == K_SPACE and enable_input:
             player_vel = lift
             score += 1# This has to be changed
-        elif event.type == pygame.JOYBUTTONDOWN:# Handle gamepad Button press
+        elif event.type == pygame.JOYBUTTONDOWN and enable_input:# Handle gamepad Button press
             player_vel = lift
             button = event.button
             print(f"Button {button} pressed")
