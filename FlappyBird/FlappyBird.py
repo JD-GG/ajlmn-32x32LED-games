@@ -55,11 +55,11 @@ player_vel = 0
 gravity = 15
 lift = -3.5
 
-# CLOCK
+# Additional variables (self explanatory)
 clock = pygame.time.Clock()
-
-# SCORE
 score = 0
+Rect = pygame.Rect# Collsision hitbox
+enable_input = True
 
 run = True
 while run:
@@ -85,7 +85,6 @@ while run:
         pillar_vel = 0# Stop Pillars
     
     # Pillar kolision
-    Rect = pygame.Rect
     player_rect = Rect(player_pos_x, player_pos_y, s.PLAYER_WIDTH, s.PILLAR_WIDTH)
     
     for i in range(s.PILLAR_COUNT):
