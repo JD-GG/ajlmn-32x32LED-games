@@ -3,7 +3,7 @@ import os
 import pygame
 from pygame.locals import *
 from mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y
-from output import draw_screen, draw_matrix, draw_matrix_representation, draw_matrix_grid, draw_position_markers
+from output import draw_screen, draw_matrix, draw_matrix_representation, draw_hitboxes, draw_matrix_grid, draw_position_markers
 import settings as s
 """from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
@@ -55,10 +55,15 @@ player_vel = 0
 gravity = 15
 lift = -6
 
+# Hitbox Rectangle Arrays for drawing
+Rect = pygame.Rect# Collsision hitbox
+pillar_hitbox_top = [Rect(0, 0, 0, 0)] * s.PILLAR_COUNT
+pillar_hitbox_bottom = [Rect(0, 0, 0, 0)] * s.PILLAR_COUNT
+pillar_hitbox_score = [Rect(0, 0, 0, 0)] * s.PILLAR_COUNT
+
 # Additional variables (self explanatory)
 clock = pygame.time.Clock()
 score = 0
-Rect = pygame.Rect# Collsision hitbox
 enable_input = True
 game_started = False
 first_time = True
@@ -95,7 +100,10 @@ while run:
         pillar_bottom_height = s.SCREEN_HEIGHT - pillar_pos_y[i]
         pillar_rect_top = Rect(pillar_pos_x[i], 0, s.PIXEL_WIDTH, pillar_top_height_y )
         pillar_rect_bottom = Rect(pillar_pos_x[i], pillar_pos_y[i], s.PIXEL_WIDTH, pillar_bottom_height )
-         
+        
+        pillar_hitbox_top[i] = pillar_rect_top
+        pillar_hitbox_bottom[i] = pillar_rect_bottom
+
         if player_rect.colliderect(pillar_rect_bottom):
             pillar_vel = 0
             enable_input = False# Disable input
@@ -104,10 +112,11 @@ while run:
             enable_input = False# Disable input
 
     # Score increment
-    
     for i in range(s.PILLAR_COUNT):
         pillar_top_height_y = pillar_pos_y[i] - s.PILLAR_HEIGHT
         gap_rect = Rect(pillar_pos_x[i] + s.PIXEL_WIDTH, pillar_top_height_y, s.PIXEL_WIDTH, s.PILLAR_HEIGHT)
+
+        pillar_hitbox_score[i] = gap_rect
 
         if player_rect.colliderect(gap_rect):
             if first_time == True:
@@ -125,7 +134,7 @@ while run:
             player_vel = lift
             button = event.button
             print(f"Button {button} pressed")
-        # Start button pressed when dead
+        # Space Button pressed when dead
         elif event.type == pygame.KEYDOWN and event.key == K_SPACE and not enable_input and player_pos_y == s.PLAYER_ON_GROUND_Y:
             enable_input = True
             player_pos_x = 80
@@ -136,6 +145,7 @@ while run:
             pillar_pos_x = init_pillar_pos_x()
             score = 0
             first_time = True
+        # Start button pressed when dead
         elif event.type == pygame.JOYBUTTONDOWN and event.button == 9 and not enable_input and player_pos_y == s.PLAYER_ON_GROUND_Y:
             enable_input = True
             player_pos_x = 80
@@ -151,6 +161,7 @@ while run:
     draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score)
     # offset_canvas = draw_matrix(screen, matrix, offset_canvas)
     draw_matrix_representation(screen)
+    draw_hitboxes(screen, pillar_pos_x, pillar_hitbox_top, pillar_hitbox_score, pillar_hitbox_bottom)
     draw_matrix_grid(screen)
     draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image
     
