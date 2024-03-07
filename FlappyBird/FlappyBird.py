@@ -93,8 +93,8 @@ while run:
     for i in range(s.PILLAR_COUNT):
         pillar_top_height_y = pillar_pos_y[i] - s.PILLAR_HEIGHT
         pillar_bottom_height = s.SCREEN_HEIGHT - pillar_pos_y[i]
-        pillar_rect_top = Rect(pillar_pos_x[i], 0, s.PIXEL_WIDTH, pillar_top_height_y )
-        pillar_rect_bottom = Rect(pillar_pos_x[i], pillar_pos_y[i], s.PIXEL_WIDTH, pillar_bottom_height )
+        pillar_rect_top = Rect(pillar_pos_x[i], 0, s.PILLAR_WIDTH, pillar_top_height_y )
+        pillar_rect_bottom = Rect(pillar_pos_x[i], pillar_pos_y[i], s.PILLAR_WIDTH, pillar_bottom_height )
          
         if player_rect.colliderect(pillar_rect_bottom):
             pillar_vel = 0
