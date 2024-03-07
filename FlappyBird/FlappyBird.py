@@ -61,6 +61,7 @@ score = 0
 Rect = pygame.Rect# Collsision hitbox
 enable_input = True
 game_started = False
+first_time = True
 
 run = True
 while run:
@@ -73,6 +74,7 @@ while run:
     for i in range(s.PILLAR_COUNT):
         pillar_pos_x[i] -= pillar_vel# Move object based on frames just like the old days
         if pillar_pos_x[i] <= 0 - s.PILLAR_WIDTH:
+            first_time = True
             pillar_pos_x[i] += (s.PILLAR_WIDTH * s.PILLAR_COUNT) + (s.PILLAR_GAP_WIDTH * s.PILLAR_COUNT)# Reset pillar to the other side
             pillar_pos_y[i] = get_random_pos_y()# Get new random height
     
@@ -91,8 +93,8 @@ while run:
     for i in range(s.PILLAR_COUNT):
         pillar_top_height_y = pillar_pos_y[i] - s.PILLAR_HEIGHT
         pillar_bottom_height = s.SCREEN_HEIGHT - pillar_pos_y[i]
-        pillar_rect_top = Rect(pillar_pos_x[i], 0, s.PILLAR_WIDTH, pillar_top_height_y )
-        pillar_rect_bottom = Rect(pillar_pos_x[i], pillar_pos_y[i], s.PILLAR_WIDTH, pillar_bottom_height )
+        pillar_rect_top = Rect(pillar_pos_x[i], 0, s.PIXEL_WIDTH, pillar_top_height_y )
+        pillar_rect_bottom = Rect(pillar_pos_x[i], pillar_pos_y[i], s.PIXEL_WIDTH, pillar_bottom_height )
          
         if player_rect.colliderect(pillar_rect_bottom):
             pillar_vel = 0
@@ -102,8 +104,15 @@ while run:
             enable_input = False# Disable input
 
     # Score increment
-    if False:
-        score += 1# Increment score
+    
+    for i in range(s.PILLAR_COUNT):
+        pillar_top_height_y = pillar_pos_y[i] - s.PILLAR_HEIGHT
+        gap_rect = Rect(pillar_pos_x[i] + s.PIXEL_WIDTH, pillar_top_height_y, s.PIXEL_WIDTH, s.PILLAR_HEIGHT)
+
+        if player_rect.colliderect(gap_rect):
+            if first_time == True:
+                score+= 1
+                first_time = False
 
     # Event listeners
     for event in pygame.event.get():
@@ -111,7 +120,7 @@ while run:
             run = False
         elif event.type == pygame.KEYDOWN and event.key == K_SPACE and enable_input:
             player_vel = lift
-            score += 1# This has to be changed
+            #score += 1# This has to be changed
         elif event.type == pygame.JOYBUTTONDOWN and enable_input:# Handle gamepad Button press
             player_vel = lift
             button = event.button
@@ -126,6 +135,7 @@ while run:
             pillar_pos_y = init_pillar_pos_y()
             pillar_pos_x = init_pillar_pos_x()
             score = 0
+            first_time = True
         elif event.type == pygame.JOYBUTTONDOWN and event.button == 9 and not enable_input and player_pos_y == s.PLAYER_ON_GROUND_Y:
             enable_input = True
             player_pos_x = 80
@@ -135,6 +145,7 @@ while run:
             pillar_pos_y = init_pillar_pos_y()
             pillar_pos_x = init_pillar_pos_x()
             score = 0
+            first_time = True
 
     # Drawing
     draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score)
