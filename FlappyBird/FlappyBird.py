@@ -50,7 +50,7 @@ pillar_vel = 2
 
 # Bird variables
 player_pos_x = 80
-player_pos_y = 80
+player_pos_y = 100
 player_vel = 0
 gravity = 15
 lift = -6
@@ -60,6 +60,7 @@ clock = pygame.time.Clock()
 score = 0
 Rect = pygame.Rect# Collsision hitbox
 enable_input = True
+game_started = False
 
 run = True
 while run:
@@ -115,6 +116,25 @@ while run:
             player_vel = lift
             button = event.button
             print(f"Button {button} pressed")
+        # Start button pressed when dead
+        elif event.type == pygame.KEYDOWN and event.key == K_SPACE and not enable_input and player_pos_y == s.PLAYER_ON_GROUND_Y:
+            enable_input = True
+            player_pos_x = 80
+            player_pos_y = 100
+            player_vel = lift
+            pillar_vel = 2
+            pillar_pos_y = init_pillar_pos_y()
+            pillar_pos_x = init_pillar_pos_x()
+            score = 0
+        elif event.type == pygame.JOYBUTTONDOWN and event.button == 9 and not enable_input and player_pos_y == s.PLAYER_ON_GROUND_Y:
+            enable_input = True
+            player_pos_x = 80
+            player_pos_y = 100
+            player_vel = lift
+            pillar_vel = 2
+            pillar_pos_y = init_pillar_pos_y()
+            pillar_pos_x = init_pillar_pos_x()
+            score = 0
 
     # Drawing
     draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score)
