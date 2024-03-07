@@ -35,8 +35,8 @@ while run:
 
     #Draw
     screen.fill((0, 0, 0))
-    pygame.draw.rect(screen, (0, 255, 0), (0, v.SCREEN_HEIGHT - v.GROUND, v.SCREEN_WIDTH, v.GROUND))
-    pygame.draw.rect(screen, (255, 0, 0), (v.PLAYERX, v.player_pos, v.PLAYERSIZE, v.PLAYERSIZE))
+    pygame.draw.rect(screen, v.GREEN, (0, v.SCREEN_HEIGHT - v.GROUND, v.SCREEN_WIDTH, v.GROUND))
+    pygame.draw.rect(screen, v.RED, (v.PLAYERX, v.player_pos, v.PLAYERSIZE, v.PLAYERSIZE))
     
     if on_ground:
         key = pygame.key.get_pressed()
