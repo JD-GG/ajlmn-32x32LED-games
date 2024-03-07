@@ -2,7 +2,7 @@
 import pygame
 import colors as c
 import settings as s
-import numbers as n
+import score
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 def draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score):
@@ -69,7 +69,7 @@ def draw_score(screen, number):
             left_pos_x = s.SCORE_POSITION_X + (j * s.PIXEL_WIDTH)
             right_pos_x = left_pos_x + (5 * s.PIXEL_WIDTH)
             pos_y = s.SCORE_POSITION_Y + (i * s.PIXEL_WIDTH)
-            if(n.SCORE[number_left][i][j]):
+            if(score.SCORE[number_left][i][j]):
                 pygame.draw.rect(screen, c.WHITE, (left_pos_x, pos_y, s.PIXEL_WIDTH, s.PIXEL_WIDTH))# Left Number
-            if(n.SCORE[number_right][i][j]):
+            if(score.SCORE[number_right][i][j]):
                 pygame.draw.rect(screen, c.WHITE, (right_pos_x, pos_y, s.PIXEL_WIDTH, s.PIXEL_WIDTH))# Right Number
