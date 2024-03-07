@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>soundplayer</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;soundplayer
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="soundplayer-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="soundplayer-module.html">Module soundplayer</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># soundplayer.py</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">thread</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="SoundPlayer"></a><div id="SoundPlayer-def"><a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt> <a class="py-toggle" href="#" id="SoundPlayer-toggle" onclick="return toggle('SoundPlayer');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="soundplayer.SoundPlayer-class.html">SoundPlayer</a><tt class="py-op">:</tt> </tt>
+</div><div id="SoundPlayer-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SoundPlayer-expanded"><a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">    Sound player based on SoX, called "the Swiss Army knife of sound processing programs" by its developper.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">    This simple Python wrapper is based on Linux shell commands running in extra threads. </tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">    For the Raspberry Pi the following installation are needed:</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">    sudo apt-get install sox</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">    sudo apt-get install mp3</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="SoundPlayer.playTone"></a><div id="SoundPlayer.playTone-def"><a name="L15"></a><tt class="py-lineno"> 15</tt> <a class="py-toggle" href="#" id="SoundPlayer.playTone-toggle" onclick="return toggle('SoundPlayer.playTone');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="soundplayer.SoundPlayer-class.html#playTone">playTone</a><tt class="py-op">(</tt><tt class="py-param">frequencies</tt><tt class="py-op">,</tt> <tt class="py-param">duration</tt><tt class="py-op">,</tt> <tt class="py-param">blocking</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundPlayer.playTone-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundPlayer.playTone-expanded"><a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">        Plays one or several sine tones with given frequencies and duration.</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">        @param frequencies: the frequency or a list of several frequencies in Hz</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">        @param duration: the duration in s</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">        @param blocking: if True, the functions blocks until playing is finished; otherwise it returns immediately (default: False)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">        @param device: the sound device ID (e.g. 0: standard device, 1: USB sound adapter)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">type</tt><tt class="py-op">(</tt><tt class="py-name">frequencies</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-name">list</tt><tt class="py-op">:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">            <tt class="py-name">frequencies</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">frequencies</tt><tt class="py-op">]</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">blocking</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">            <tt id="link-0" class="py-name" targets="Class soundplayer.SoundPlayer=soundplayer.SoundPlayer-class.html"><a title="soundplayer.SoundPlayer" class="py-name" href="#" onclick="return doclink('link-0', 'SoundPlayer', 'link-0');">SoundPlayer</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Static Method soundplayer.SoundPlayer._emit()=soundplayer.SoundPlayer-class.html#_emit"><a title="soundplayer.SoundPlayer._emit" class="py-name" href="#" onclick="return doclink('link-1', '_emit', 'link-1');">_emit</a></tt><tt class="py-op">(</tt><tt class="py-name">frequencies</tt><tt class="py-op">,</tt> <tt class="py-name">duration</tt><tt class="py-op">,</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">            <tt class="py-name">thread</tt><tt class="py-op">.</tt><tt class="py-name">start_new_thread</tt><tt class="py-op">(</tt><tt id="link-2" class="py-name"><a title="soundplayer.SoundPlayer" class="py-name" href="#" onclick="return doclink('link-2', 'SoundPlayer', 'link-0');">SoundPlayer</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="soundplayer.SoundPlayer._emit" class="py-name" href="#" onclick="return doclink('link-3', '_emit', 'link-1');">_emit</a></tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">frequencies</tt><tt class="py-op">,</tt> <tt class="py-name">duration</tt><tt class="py-op">,</tt> <tt class="py-name">device</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="SoundPlayer.isPlaying"></a><div id="SoundPlayer.isPlaying-def"><a name="L31"></a><tt class="py-lineno"> 31</tt> <a class="py-toggle" href="#" id="SoundPlayer.isPlaying-toggle" onclick="return toggle('SoundPlayer.isPlaying');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="soundplayer.SoundPlayer-class.html#isPlaying">isPlaying</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundPlayer.isPlaying-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundPlayer.isPlaying-expanded"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">        Checks if the sound is still playing.</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">        @return: True, if the sound is playing; otherwise False</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-name">info</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">popen</tt><tt class="py-op">(</tt><tt class="py-string">"ps -Af"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-name">process_count</tt> <tt class="py-op">=</tt> <tt class="py-name">info</tt><tt class="py-op">.</tt><tt class="py-name">count</tt><tt class="py-op">(</tt><tt class="py-string">"play"</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">process_count</tt> <tt class="py-op">&gt;=</tt> <tt class="py-number">2</tt> </tt>
+</div><a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="SoundPlayer._emit"></a><div id="SoundPlayer._emit-def"><a name="L41"></a><tt class="py-lineno"> 41</tt> <a class="py-toggle" href="#" id="SoundPlayer._emit-toggle" onclick="return toggle('SoundPlayer._emit');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="soundplayer.SoundPlayer-class.html#_emit">_emit</a><tt class="py-op">(</tt><tt class="py-param">frequencies</tt><tt class="py-op">,</tt> <tt class="py-param">duration</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundPlayer._emit-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundPlayer._emit-expanded"><a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-string">" "</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">f</tt> <tt class="py-keyword">in</tt> <tt class="py-name">frequencies</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">            <tt class="py-name">s</tt> <tt class="py-op">+=</tt> <tt class="py-string">"sin "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">f</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">" "</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-string">"AUDIODEV=hw:"</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">device</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">" play -q -n synth "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">duration</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> \ </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">            <tt class="py-name">s</tt> <tt class="py-op">+</tt> <tt class="py-string">" 2&gt; /dev/null"</tt>  </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">system</tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">         </tt>
+<a name="SoundPlayer.__init__"></a><div id="SoundPlayer.__init__-def"><a name="L49"></a><tt class="py-lineno"> 49</tt> <a class="py-toggle" href="#" id="SoundPlayer.__init__-toggle" onclick="return toggle('SoundPlayer.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="soundplayer.SoundPlayer-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">audiofile</tt><tt class="py-op">,</tt> <tt class="py-param">device</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundPlayer.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundPlayer.__init__-expanded"><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">        Creates a sound player to play the given audio file (wav, mp3, etc.) </tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">        to be played at given device ID. Throws exception, if the sound resource is not found.</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">        @param audiofile: the sound file to play</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">        @param device: the sound device ID (e.g. 0: standard device, 1: USB sound adapter)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">audiofile</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Audio resource "</tt> <tt class="py-op">+</tt> <tt class="py-name">audiofile</tt> <tt class="py-op">+</tt> <tt class="py-string">" not found"</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">audiofile</tt> <tt class="py-op">=</tt> <tt class="py-name">audiofile</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">device</tt> <tt class="py-op">=</tt> <tt class="py-name">device</tt> </tt>
+</div><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">  </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="SoundPlayer._run"></a><div id="SoundPlayer._run-def"><a name="L62"></a><tt class="py-lineno"> 62</tt> <a class="py-toggle" href="#" id="SoundPlayer._run-toggle" onclick="return toggle('SoundPlayer._run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="soundplayer.SoundPlayer-class.html#_run">_run</a><tt class="py-op">(</tt><tt class="py-param">cmd</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundPlayer._run-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundPlayer._run-expanded"><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">system</tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="SoundPlayer.play"></a><div id="SoundPlayer.play-def"><a name="L65"></a><tt class="py-lineno"> 65</tt> <a class="py-toggle" href="#" id="SoundPlayer.play-toggle" onclick="return toggle('SoundPlayer.play');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="soundplayer.SoundPlayer-class.html#play">play</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">volume</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-param">blocking</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundPlayer.play-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundPlayer.play-expanded"><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">        Plays the sound with given volume (default: 1). The function returns immediately.</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">        @param volume: the sound level (default: 1)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        @param blocking: if True, the functions blocks until playing is finished; otherwise it returns immediately (default: False)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">volume</tt> <tt class="py-op">=</tt> <tt class="py-name">volume</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-string">"AUDIODEV=hw:"</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">device</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> \ </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">            <tt class="py-string">" play -v "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">volume</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> \ </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">            <tt class="py-string">" -q "</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">audiofile</tt> <tt class="py-op">+</tt> <tt class="py-string">" 2&gt; /dev/null"</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">blocking</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Static Method soundplayer.SoundPlayer._run()=soundplayer.SoundPlayer-class.html#_run"><a title="soundplayer.SoundPlayer._run" class="py-name" href="#" onclick="return doclink('link-4', '_run', 'link-4');">_run</a></tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">            <tt class="py-name">thread</tt><tt class="py-op">.</tt><tt class="py-name">start_new_thread</tt><tt class="py-op">(</tt><tt id="link-5" class="py-name"><a title="soundplayer.SoundPlayer" class="py-name" href="#" onclick="return doclink('link-5', 'SoundPlayer', 'link-0');">SoundPlayer</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="soundplayer.SoundPlayer._run" class="py-name" href="#" onclick="return doclink('link-6', '_run', 'link-4');">_run</a></tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">,</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">     </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="SoundPlayer.stop"></a><div id="SoundPlayer.stop-def"><a name="L82"></a><tt class="py-lineno"> 82</tt> <a class="py-toggle" href="#" id="SoundPlayer.stop-toggle" onclick="return toggle('SoundPlayer.stop');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="soundplayer.SoundPlayer-class.html#stop">stop</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundPlayer.stop-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundPlayer.stop-expanded"><a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">        Stops playing.</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-string">"sudo killall -9 play"</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">thread</tt><tt class="py-op">.</tt><tt class="py-name">start_new_thread</tt><tt class="py-op">(</tt><tt id="link-7" class="py-name"><a title="soundplayer.SoundPlayer" class="py-name" href="#" onclick="return doclink('link-7', 'SoundPlayer', 'link-0');">SoundPlayer</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="soundplayer.SoundPlayer._run" class="py-name" href="#" onclick="return doclink('link-8', '_run', 'link-4');">_run</a></tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">,</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="SoundPlayer.pause"></a><div id="SoundPlayer.pause-def"><a name="L90"></a><tt class="py-lineno"> 90</tt> <a class="py-toggle" href="#" id="SoundPlayer.pause-toggle" onclick="return toggle('SoundPlayer.pause');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="soundplayer.SoundPlayer-class.html#pause">pause</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundPlayer.pause-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundPlayer.pause-expanded"><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">        Pauses playing momentarily.</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-string">"sudo pkill -STOP play"</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-name">thread</tt><tt class="py-op">.</tt><tt class="py-name">start_new_thread</tt><tt class="py-op">(</tt><tt id="link-9" class="py-name"><a title="soundplayer.SoundPlayer" class="py-name" href="#" onclick="return doclink('link-9', 'SoundPlayer', 'link-0');">SoundPlayer</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="soundplayer.SoundPlayer._run" class="py-name" href="#" onclick="return doclink('link-10', '_run', 'link-4');">_run</a></tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">,</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="SoundPlayer.resume"></a><div id="SoundPlayer.resume-def"><a name="L98"></a><tt class="py-lineno"> 98</tt> <a class="py-toggle" href="#" id="SoundPlayer.resume-toggle" onclick="return toggle('SoundPlayer.resume');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="soundplayer.SoundPlayer-class.html#resume">resume</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SoundPlayer.resume-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SoundPlayer.resume-expanded"><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">        Resumes playing (after it has been stopped).</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-string">"sudo pkill -CONT play"</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-name">thread</tt><tt class="py-op">.</tt><tt class="py-name">start_new_thread</tt><tt class="py-op">(</tt><tt id="link-11" class="py-name"><a title="soundplayer.SoundPlayer" class="py-name" href="#" onclick="return doclink('link-11', 'SoundPlayer', 'link-0');">SoundPlayer</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="soundplayer.SoundPlayer._run" class="py-name" href="#" onclick="return doclink('link-12', '_run', 'link-4');">_run</a></tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">,</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon May 16 09:18:29 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
