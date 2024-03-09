@@ -29,7 +29,7 @@ pygame.joystick.init()
 # Check for available gamepads
 joysticks = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())]
 if not joysticks:
-    print("No gamepads detected. Exiting.")
+    print("No gamepads detected.")
 
 for joystick in joysticks:
     joystick.init()
@@ -131,8 +131,6 @@ while run:
             #score += 1# This has to be changed
         elif event.type == pygame.JOYBUTTONDOWN and enable_input:# Handle gamepad Button press
             player_vel = lift
-            button = event.button
-            print(f"Button {button} pressed")
         # Space pressed when dead
         elif event.type == pygame.KEYDOWN and event.key == K_SPACE and not enable_input and player_pos_y == s.PLAYER_ON_GROUND_Y:
             enable_input = True
