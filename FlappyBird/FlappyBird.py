@@ -7,7 +7,7 @@ from output import draw_screen, draw_matrix, draw_matrix_representation, draw_hi
 import settings as s
 """from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
-# This makes it so that gampad input can be used if window is no in focus
+# This makes it so that gampad input can be used if window is not in focus
 os.environ["SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS"] = "1"
 
 # Configuration for the matrix
