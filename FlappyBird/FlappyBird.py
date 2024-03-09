@@ -44,13 +44,13 @@ changing_screen = (0, 0, s.SCREEN_WIDTH, s.SCREEN_HEIGHT)
 changing_matrix_screen = (s.SCREEN_WIDTH, 0, s.SCREEN_WIDTH, s.SCREEN_HEIGHT)
 
 # Pilar Variables
-pillar_pos_y = init_pillar_pos_y()
-pillar_pos_x = init_pillar_pos_x()
-pillar_vel = 2
+pillar_pos_y = [None] * s.PILLAR_COUNT
+pillar_pos_x = [None] * s.PILLAR_COUNT
+pillar_vel = 0
 
 # Bird variables
-player_pos_x = 80
-player_pos_y = 100
+player_pos_x = 0
+player_pos_y = 0
 player_vel = 0
 gravity = 15
 lift = -6
@@ -63,12 +63,33 @@ pillar_hitbox_score = [Rect(0, 0, 0, 0)] * s.PILLAR_COUNT
 
 # Additional variables (self explanatory)
 clock = pygame.time.Clock()
-score = 0
-enable_input = True
 game_started = False
+run = True
+enable_input = True
+score = 0
 first_time = True
 
-run = True
+def initFlappyGlobals():
+    global enable_input
+    global player_pos_x
+    global player_pos_y
+    global player_vel
+    global pillar_pos_y
+    global pillar_pos_x
+    global pillar_vel
+    global score
+    global first_time
+    enable_input = True
+    player_pos_x = 80
+    player_pos_y = 100
+    player_vel = lift
+    pillar_pos_y = init_pillar_pos_y()
+    pillar_pos_x = init_pillar_pos_x()
+    pillar_vel = 2
+    score = 0
+    first_time = True
+
+initFlappyGlobals()
 while run:
     # Player Physics
     tickTime = clock.tick(60) / 1000  
@@ -133,26 +154,11 @@ while run:
             player_vel = lift
         # Space pressed when dead
         elif event.type == pygame.KEYDOWN and event.key == K_SPACE and not enable_input and player_pos_y == s.PLAYER_ON_GROUND_Y:
-            enable_input = True
-            player_pos_x = 80
-            player_pos_y = 100
-            player_vel = lift
-            pillar_vel = 2
-            pillar_pos_y = init_pillar_pos_y()
-            pillar_pos_x = init_pillar_pos_x()
-            score = 0
-            first_time = True
-        # Start button pressed when dead
-        elif event.type == pygame.JOYBUTTONDOWN and event.button == 9 and not enable_input and player_pos_y == s.PLAYER_ON_GROUND_Y:
-            enable_input = True
-            player_pos_x = 80
-            player_pos_y = 100
-            player_vel = lift
-            pillar_vel = 2
-            pillar_pos_y = init_pillar_pos_y()
-            pillar_pos_x = init_pillar_pos_x()
-            score = 0
-            first_time = True
+            initFlappyGlobals()
+
+        # NOT SELECT button pressed when dead
+        elif event.type == pygame.JOYBUTTONDOWN and event.button != 8 and not enable_input and player_pos_y == s.PLAYER_ON_GROUND_Y:
+            initFlappyGlobals()
 
     # Drawing
     draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score)
