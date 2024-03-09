@@ -94,16 +94,17 @@ initFlappyGlobals()
 while run:
     # Player Physics
     tickTime = clock.tick(60) / 1000  
-    player_vel += gravity * tickTime  
-    player_pos_y += player_vel
+    if game_started:
+        player_vel += gravity * tickTime  
+        player_pos_y += player_vel
 
-    # Pillar Physics
-    for i in range(s.PILLAR_COUNT):
-        pillar_pos_x[i] -= pillar_vel# Move object based on frames just like the old days
-        if pillar_pos_x[i] <= 0 - s.PILLAR_WIDTH:
-            first_time = True
-            pillar_pos_x[i] += (s.PILLAR_WIDTH * s.PILLAR_COUNT) + (s.PILLAR_GAP_WIDTH * s.PILLAR_COUNT)# Reset pillar to the other side
-            pillar_pos_y[i] = get_random_pos_y()# Get new random height
+        # Pillar Physics
+        for i in range(s.PILLAR_COUNT):
+            pillar_pos_x[i] -= pillar_vel# Move object based on frames just like the old days
+            if pillar_pos_x[i] <= 0 - s.PILLAR_WIDTH:
+                first_time = True
+                pillar_pos_x[i] += (s.PILLAR_WIDTH * s.PILLAR_COUNT) + (s.PILLAR_GAP_WIDTH * s.PILLAR_COUNT)# Reset pillar to the other side
+                pillar_pos_y[i] = get_random_pos_y()# Get new random height
     
     # Edgecases
     if player_pos_y < 0:# Top
@@ -150,9 +151,11 @@ while run:
         if event.type == pygame.QUIT:
             run = False
         elif event.type == pygame.KEYDOWN and event.key == K_SPACE and enable_input:
+            game_started = True
             player_vel = lift
-            #score += 1# This has to be changed
-        elif event.type == pygame.JOYBUTTONDOWN and enable_input:# Handle gamepad Button press
+        # NOT SELECT pressed (Select gets you to the gaem select screen)
+        elif event.type == pygame.JOYBUTTONDOWN and event.button != 8 and enable_input:# Handle gamepad Button press
+            game_started = True
             player_vel = lift
         # Space pressed when dead
         elif event.type == pygame.KEYDOWN and event.key == K_SPACE and not enable_input and player_pos_y == s.PLAYER_ON_GROUND_Y:
