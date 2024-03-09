@@ -57,6 +57,7 @@ lift = -6
 
 # Hitbox Rectangle Arrays for drawing
 Rect = pygame.Rect# Collsision hitbox
+player_hitbox = Rect(0, 0, 0, 0)
 pillar_hitbox_top = [Rect(0, 0, 0, 0)] * s.PILLAR_COUNT
 pillar_hitbox_bottom = [Rect(0, 0, 0, 0)] * s.PILLAR_COUNT
 pillar_hitbox_score = [Rect(0, 0, 0, 0)] * s.PILLAR_COUNT
@@ -115,6 +116,7 @@ while run:
     
     # Pillar kolision
     player_rect = Rect(player_pos_x, player_pos_y, s.PLAYER_WIDTH, s.PILLAR_WIDTH)
+    player_hitbox = player_rect
     for i in range(s.PILLAR_COUNT):
         pillar_top_height_y = pillar_pos_y[i] - s.PILLAR_HEIGHT
         pillar_bottom_height = s.SCREEN_HEIGHT - pillar_pos_y[i]
@@ -164,7 +166,7 @@ while run:
     draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score)
     # offset_canvas = draw_matrix(screen, matrix, offset_canvas)
     draw_matrix_representation(screen)
-    draw_hitboxes(screen, pillar_pos_x, pillar_hitbox_top, pillar_hitbox_score, pillar_hitbox_bottom)
+    draw_hitboxes(screen, player_hitbox, pillar_pos_x, pillar_hitbox_top, pillar_hitbox_score, pillar_hitbox_bottom)
     draw_matrix_grid(screen)
     draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image
     
