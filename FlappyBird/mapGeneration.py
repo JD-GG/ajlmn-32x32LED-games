@@ -1,7 +1,6 @@
 #! /usr/bin/env python3
 from random import randint
-import colors as c
-import settings as s
+import FlappyBird.settings as s
 
 def init_pillar_pos_x():
     first_pillar_position = s.SCREEN_WIDTH + s.PILLAR_WIDTH# First pillar is just outside of screen
