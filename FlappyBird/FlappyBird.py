@@ -116,32 +116,26 @@ while run:
         enable_input = False# Disable input
     
     # Pillar kolision
-    player_rect = Rect(player_pos_x, player_pos_y, s.PLAYER_WIDTH, s.PILLAR_WIDTH)
-    player_hitbox = player_rect
+    player_hitbox = Rect(player_pos_x, player_pos_y, s.PLAYER_WIDTH, s.PILLAR_WIDTH)
     for i in range(s.PILLAR_COUNT):
         pillar_top_height_y = pillar_pos_y[i] - s.PILLAR_HEIGHT
         pillar_bottom_height = s.SCREEN_HEIGHT - pillar_pos_y[i]
-        pillar_rect_top = Rect(pillar_pos_x[i], 0, s.PILLAR_WIDTH, pillar_top_height_y )
-        pillar_rect_bottom = Rect(pillar_pos_x[i], pillar_pos_y[i], s.PILLAR_WIDTH, pillar_bottom_height )
+        pillar_hitbox_top[i] = Rect(pillar_pos_x[i], 0, s.PILLAR_WIDTH, pillar_top_height_y )
+        pillar_hitbox_bottom[i] = Rect(pillar_pos_x[i], pillar_pos_y[i], s.PILLAR_WIDTH, pillar_bottom_height )
          
-        pillar_hitbox_top[i] = pillar_rect_top
-        pillar_hitbox_bottom[i] = pillar_rect_bottom
-
-        if player_rect.colliderect(pillar_rect_bottom):
+        if player_hitbox.colliderect(pillar_hitbox_bottom[i]):
             pillar_vel = 0
             enable_input = False# Disable input
-        elif player_rect.colliderect(pillar_rect_top):
+        elif player_hitbox.colliderect(pillar_hitbox_top[i]):
             pillar_vel = 0 
             enable_input = False# Disable input
 
     # Score increment
     for i in range(s.PILLAR_COUNT):
         pillar_top_height_y = pillar_pos_y[i] - s.PILLAR_HEIGHT
-        gap_rect = Rect(pillar_pos_x[i] + s.PIXEL_WIDTH, pillar_top_height_y, s.PIXEL_WIDTH, s.PILLAR_HEIGHT)
+        pillar_hitbox_score[i] = Rect(pillar_pos_x[i] + s.PIXEL_WIDTH, pillar_top_height_y, s.PIXEL_WIDTH, s.PILLAR_HEIGHT)
 
-        pillar_hitbox_score[i] = gap_rect
-
-        if player_rect.colliderect(gap_rect):
+        if player_hitbox.colliderect(pillar_hitbox_score[i]):
             if first_time == True:
                 score+= 1
                 first_time = False
