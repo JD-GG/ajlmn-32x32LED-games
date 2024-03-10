@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 import GeometryDash.Variables as v
 # import RGBMatrixEmulator
+from FlappyBird.output import draw_matrix_representation
 """
 pygame.init()
 pygame.joystick.init()
@@ -52,5 +53,7 @@ def geometry_dash_game(screen):
                 button = event.button #Start=9, X=0, Y=3, A=1, B=2
             elif event.type == pygame.KEYDOWN and event.key == K_s:
                 run = False
+
+        draw_matrix_representation(screen)
 
         pygame.display.update()

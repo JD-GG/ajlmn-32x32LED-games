@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 import random
+from FlappyBird.output import draw_matrix_representation
 
 # pygame.init()
 
@@ -77,5 +78,7 @@ def snake_game(screen):
         for pos in snake_pos:
             pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(pos[0], pos[1], SNAKE_SIZE, SNAKE_SIZE))
         pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(food_pos[0], food_pos[1], FOOD_SIZE, FOOD_SIZE))
+
+        draw_matrix_representation(screen)
 
         pygame.display.update()

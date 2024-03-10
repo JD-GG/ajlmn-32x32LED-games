@@ -23,11 +23,14 @@ for joystick in joysticks:
     print(f"Detected Gamepad: {joystick.get_name()}")
 
 # Setup screen for ALL GAMES
-screen = pygame.display.set_mode((s.SCREEN_WIDTH, s.SCREEN_HEIGHT))
-# screen = pygame.display.set_mode((s.SCREEN_WIDTH*2, s.SCREEN_HEIGHT))
+#screen = pygame.display.set_mode((s.SCREEN_WIDTH, s.SCREEN_HEIGHT))
+screen = pygame.display.set_mode((s.SCREEN_WIDTH*2, s.SCREEN_HEIGHT))
 pygame.display.set_caption("Startscreen")
 
+# Logic to select game can go right here
 flappy_bird_game(screen)
 geometry_dash_game(screen)
 snake_game(screen)
 flappy_bird_game(screen)
+
+pygame.quit()

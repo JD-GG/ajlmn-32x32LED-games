@@ -137,10 +137,10 @@ def flappy_bird_game(screen):
         # Drawing
         draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score)
         # offset_canvas = draw_matrix(screen, matrix, offset_canvas)
-        # draw_matrix_representation(screen)
-        # draw_hitboxes(screen, player_hitbox, pillar_pos_x, pillar_hitbox_top, pillar_hitbox_score, pillar_hitbox_bottom)
-        # draw_matrix_grid(screen)
-        # draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image
+        draw_matrix_representation(screen)
+        draw_hitboxes(screen, player_hitbox, pillar_pos_x, pillar_hitbox_top, pillar_hitbox_score, pillar_hitbox_bottom)
+        draw_matrix_grid(screen)
+        draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image
         
         pygame.display.update()# Update everything. What is being shown is not what is going to be given to the matrix. 
         

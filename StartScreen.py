@@ -1,10 +1,11 @@
-##! /usr/bin/env python3
 import os
 import pygame
 from pygame.locals import *
-# from rgbmatrix import RGBMatrix, RGBMatrixOptions
-import FlappyBird
-
+import FlappyBird.settings as s
+from FlappyBird.FlappyBird import flappy_bird_game
+from GeometryDash.Main import geometry_dash_game
+from Snake.snake import snake_game
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 # This makes it so that gampad input can be used if window is not in focus
 os.environ["SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS"] = "1"
@@ -34,6 +35,14 @@ for joystick in joysticks:
     joystick.init()
     print(f"Detected Gamepad: {joystick.get_name()}")
 
-# Setup screen
-screen = pygame.display.set_mode((s.SCREEN_WIDTH*2, s.SCREEN_HEIGHT))
-pygame.display.set_caption("Flappy Bird")
+# Setup screen for ALL GAMES
+screen = pygame.display.set_mode((s.SCREEN_WIDTH, s.SCREEN_HEIGHT))
+# screen = pygame.display.set_mode((s.SCREEN_WIDTH*2, s.SCREEN_HEIGHT))
+pygame.display.set_caption("Startscreen")
+
+flappy_bird_game(screen, matrix, offset_canvas)
+geometry_dash_game(screen, matrix, offset_canvas)
+snake_game(screen, matrix, offset_canvas)
+flappy_bird_game(screen, matrix, offset_canvas)
+
+pygame.quit()
