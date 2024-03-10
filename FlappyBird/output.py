@@ -3,7 +3,7 @@ import pygame
 import colors as c
 import settings as s
 import score
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
+# from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 def draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score):
     screen.fill(c.DARK_SKY_BLUE)
