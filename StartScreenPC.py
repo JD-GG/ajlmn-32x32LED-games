@@ -23,7 +23,6 @@ for joystick in joysticks:
     print(f"Detected Gamepad: {joystick.get_name()}")
 
 # Setup screen for ALL GAMES
-#screen = pygame.display.set_mode((s.SCREEN_WIDTH, s.SCREEN_HEIGHT))
 screen = pygame.display.set_mode((s.SCREEN_WIDTH*2, s.SCREEN_HEIGHT))
 pygame.display.set_caption("Startscreen")
 
