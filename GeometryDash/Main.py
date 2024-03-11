@@ -53,6 +53,8 @@ def geometry_dash_game(screen):
                 button = event.button #Start=9, X=0, Y=3, A=1, B=2
             elif event.type == pygame.KEYDOWN and event.key == K_s:
                 run = False
+            elif event.type == pygame.JOYBUTTONDOWN and event.button == 8:
+                run = False
 
         draw_matrix_representation(screen)
 

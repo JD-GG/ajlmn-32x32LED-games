@@ -131,7 +131,11 @@ def flappy_bird_game(screen):
             # NOT SELECT button pressed when dead
             elif event.type == pygame.JOYBUTTONDOWN and event.button != 8 and not enable_input and player_pos_y == s.PLAYER_ON_GROUND_Y:
                 initFlappyGlobals()
+            # Stop game and go to game select
             elif event.type == pygame.KEYDOWN and event.key == K_s:
+                run = False
+            # Stop game and go to game select
+            elif event.type == pygame.JOYBUTTONDOWN and event.button == 8:
                 run = False
 
         # Drawing

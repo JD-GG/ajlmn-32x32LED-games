@@ -42,6 +42,8 @@ def snake_game(screen):
                     snake_vel = [0, speed]
                 elif event.key == K_s:
                     run = False
+            elif event.type == pygame.JOYBUTTONDOWN and event.button == 8:
+                run = False
 
         snake_head = [snake_pos[0][0] + snake_vel[0], snake_pos[0][1] + snake_vel[1]]
 
