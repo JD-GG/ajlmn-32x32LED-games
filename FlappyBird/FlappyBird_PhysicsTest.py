@@ -13,7 +13,7 @@ pygame.display.set_caption("Flappy Bird")
 player_pos = [100, 320]
 player_vel = 0
 gravity = 15
-lift = -3.5
+lift = -6
 
 clock = pygame.time.Clock()
 

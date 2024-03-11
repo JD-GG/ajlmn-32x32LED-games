@@ -1,6 +1,11 @@
+#! /usr/bin/env python3
 # This file defines standard colors than can be used by any module using importName.color
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 FLAPPY_ORANGE = (245, 174, 49)
 SKY_BLUE = (112, 200, 205)
+DARK_SKY_BLUE = (60, 164, 170)
+MORE_DARK_SKY_BLUE = (33, 91, 94)
 VIBRANT_SKY_BLUE = (115, 197, 211)
 LIGHT_GREEN = (156, 231, 90)
 GREEN = (115, 191, 44)

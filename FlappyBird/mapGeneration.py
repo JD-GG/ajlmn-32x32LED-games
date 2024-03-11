@@ -1,4 +1,4 @@
-import pygame
+#! /usr/bin/env python3
 from random import randint
 import colors as c
 import settings as s
