@@ -84,7 +84,7 @@ def flappy_bird_game(screen):
             enable_input = False# Disable input
         
         # Pillar kolision
-        player_rect = Rect(player_pos_x, player_pos_y, s.PLAYER_WIDTH, s.PILLAR_WIDTH)
+        player_rect = Rect(player_pos_x, player_pos_y, s.PLAYER_WIDTH, s.PLAYER_WIDTH)
         player_hitbox = player_rect
         for i in range(s.PILLAR_COUNT):
             pillar_top_height_y = pillar_pos_y[i] - s.PILLAR_HEIGHT
