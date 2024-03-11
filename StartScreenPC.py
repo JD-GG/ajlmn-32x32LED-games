@@ -30,6 +30,5 @@ pygame.display.set_caption("Startscreen")
 flappy_bird_game(screen)
 geometry_dash_game(screen)
 snake_game(screen)
-flappy_bird_game(screen)
 
 pygame.quit()
