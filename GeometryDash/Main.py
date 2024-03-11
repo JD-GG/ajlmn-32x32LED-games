@@ -3,21 +3,7 @@ from pygame.locals import *
 import GeometryDash.Variables as v
 # import RGBMatrixEmulator
 from FlappyBird.output import draw_matrix_representation
-"""
-pygame.init()
-pygame.joystick.init()
 
-# Check for available gamepads
-joystick = 0
-num_joysticks = pygame.joystick.get_count()
-if num_joysticks > 0:
-    # Initialize the first gamepad
-    joystick = pygame.joystick.Joystick(0)
-    joystick.init()
-
-# Setup display
-screen = pygame.display.set_mode((v.SCREEN_WIDTH, v.SCREEN_HEIGHT))
-pygame.display.set_caption("Geometry Dash")"""
 def geometry_dash_game(screen):
     clock = pygame.time.Clock()
 

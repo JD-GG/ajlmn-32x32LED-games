@@ -7,10 +7,6 @@ import FlappyBird.settings as s
 # from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 def flappy_bird_game(screen):
-    # Setup different screen halfes
-    changing_screen = (0, 0, s.SCREEN_WIDTH, s.SCREEN_HEIGHT)
-    changing_matrix_screen = (s.SCREEN_WIDTH, 0, s.SCREEN_WIDTH, s.SCREEN_HEIGHT)
-
     # Pilar Variables
     pillar_pos_y = [None] * s.PILLAR_COUNT
     pillar_pos_x = [None] * s.PILLAR_COUNT

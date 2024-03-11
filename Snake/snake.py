@@ -3,10 +3,6 @@ from pygame.locals import *
 import random
 from FlappyBird.output import draw_matrix_representation
 
-# pygame.init()
-
-# screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-# pygame.display.set_caption("Snake")
 def snake_game(screen):
     SCREEN_WIDTH = 640
     SCREEN_HEIGHT = 640
