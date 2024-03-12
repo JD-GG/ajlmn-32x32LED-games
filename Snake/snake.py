@@ -1,9 +1,10 @@
 import pygame
 from pygame.locals import *
 import random
-from FlappyBird.output import draw_matrix_representation
+from FlappyBird.output import draw_matrix_representation, draw_matrix
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
-def snake_game(screen):
+def snake_game(screen, matrix, offset_canvas):
     SCREEN_WIDTH = 640
     SCREEN_HEIGHT = 640
     SNAKE_SIZE = 20
@@ -38,6 +39,23 @@ def snake_game(screen):
                     snake_vel = [0, speed]
                 elif event.key == K_s:
                     run = False
+            # Joypad axis motion event
+            elif event.type == pygame.JOYAXISMOTION:
+                if event.axis == 0:
+                    if event.value < -0.5 and snake_vel[0] != speed:
+                        snake_vel = [-speed, 0]
+                        print("Left")
+                    elif event.value > 0.5 and snake_vel[0] != -speed:
+                        snake_vel = [speed, 0]
+                        print("Right")
+                elif event.axis == 1:
+                    if event.value < -0.5 and snake_vel[1] != speed:
+                        snake_vel = [0, -speed]
+                        print("Up")
+                    elif event.value > 0.5 and snake_vel[1] != -speed:
+                        snake_vel = [0, speed]
+                        print("Down")
+            # SELECT
             elif event.type == pygame.JOYBUTTONDOWN and event.button == 8:
                 run = False
 
@@ -77,6 +95,6 @@ def snake_game(screen):
             pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(pos[0], pos[1], SNAKE_SIZE, SNAKE_SIZE))
         pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(food_pos[0], food_pos[1], FOOD_SIZE, FOOD_SIZE))
 
-        draw_matrix_representation(screen)
+        offset_canvas = draw_matrix(screen, matrix, offset_canvas)
 
         pygame.display.update()

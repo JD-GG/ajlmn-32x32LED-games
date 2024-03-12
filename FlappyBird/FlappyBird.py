@@ -1,12 +1,12 @@
-##! /usr/bin/env python3
+#! /usr/bin/env python3
 import pygame
 from pygame.locals import *
 from FlappyBird.mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y
 from FlappyBird.output import draw_screen, draw_matrix, draw_matrix_representation, draw_hitboxes, draw_matrix_grid, draw_position_markers
 import FlappyBird.settings as s
-# from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
-def flappy_bird_game(screen):
+def flappy_bird_game(screen, matrix):
     # Pilar Variables
     pillar_pos_y = [None] * s.PILLAR_COUNT
     pillar_pos_x = [None] * s.PILLAR_COUNT
@@ -136,11 +136,11 @@ def flappy_bird_game(screen):
 
         # Drawing
         draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score)
-        # offset_canvas = draw_matrix(screen, matrix, offset_canvas)
-        draw_matrix_representation(screen)
-        draw_hitboxes(screen, player_hitbox, pillar_pos_x, pillar_hitbox_top, pillar_hitbox_score, pillar_hitbox_bottom)
-        draw_matrix_grid(screen)
-        draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image
+        offset_canvas = draw_matrix(screen, matrix, offset_canvas)
+        # draw_matrix_representation(screen)
+        # draw_hitboxes(screen, player_hitbox, pillar_pos_x, pillar_hitbox_top, pillar_hitbox_score, pillar_hitbox_bottom)
+        # draw_matrix_grid(screen)
+        # draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y)# Drawing markers after matrix conversion so they won't show up in the image
         
-        pygame.display.update()# Update everything. What is being shown is not what is going to be given to the matrix. 
+        # pygame.display.update()# Update everything. What is being shown is not what is going to be given to the matrix. 
         

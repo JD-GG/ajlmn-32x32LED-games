@@ -2,9 +2,11 @@ import pygame
 from pygame.locals import *
 import GeometryDash.Variables as v
 # import RGBMatrixEmulator
-from FlappyBird.output import draw_matrix_representation
+from FlappyBird.output import draw_matrix_representation, draw_matrix
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
-def geometry_dash_game(screen):
+
+def geometry_dash_game(screen, matrix, offset_canvas):
     clock = pygame.time.Clock()
 
     # Kollisionserkennung und -behandlung
@@ -42,6 +44,7 @@ def geometry_dash_game(screen):
             elif event.type == pygame.JOYBUTTONDOWN and event.button == 8:
                 run = False
 
-        draw_matrix_representation(screen)
+        # draw_matrix_representation(screen)
+        offset_canvas = draw_matrix(screen, matrix, offset_canvas)
 
-        pygame.display.update()
+        # pygame.display.update()
