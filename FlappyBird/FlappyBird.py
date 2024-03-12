@@ -6,7 +6,7 @@ from FlappyBird.output import draw_screen, draw_matrix, draw_matrix_representati
 import FlappyBird.settings as s
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
-def flappy_bird_game(screen, matrix):
+def flappy_bird_game(screen, matrix, offset_canvas):
     # Pilar Variables
     pillar_pos_y = [None] * s.PILLAR_COUNT
     pillar_pos_x = [None] * s.PILLAR_COUNT
