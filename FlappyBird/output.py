@@ -6,7 +6,7 @@ import FlappyBird.score as score
 # from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 def draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score):
-    screen.fill(c.DARK_SKY_BLUE)
+    screen.fill(c.MORE_DARK_SKY_BLUE)
     draw_pillars(screen, pillar_pos_x, pillar_pos_y)
     pygame.draw.rect(screen, c.FLAPPY_ORANGE, (player_pos_x, player_pos_y, s.PLAYER_WIDTH, s.PLAYER_WIDTH))# Player
     pygame.draw.rect(screen, c.GROUND_BROWN, (0, s.SCREEN_HEIGHT - s.GROUND_HEIGHT, s.SCREEN_WIDTH, s.GROUND_HEIGHT))# Ground dirt
