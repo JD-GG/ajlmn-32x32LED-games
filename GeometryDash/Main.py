@@ -3,7 +3,12 @@ from pygame.locals import *
 import GeometryDash.Variables as v
 # import RGBMatrixEmulator
 from FlappyBird.output import draw_matrix_representation, draw_matrix
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
+
+started_on_pi = True
+try:
+    from rgbmatrix import RGBMatrix, RGBMatrixOptions
+except ImportError:
+    started_on_pi = False
 
 
 def geometry_dash_game(screen, matrix, offset_canvas):
@@ -44,7 +49,8 @@ def geometry_dash_game(screen, matrix, offset_canvas):
             elif event.type == pygame.JOYBUTTONDOWN and event.button == 8:
                 run = False
 
-        # draw_matrix_representation(screen)
-        offset_canvas = draw_matrix(screen, matrix, offset_canvas)
-
-        # pygame.display.update()
+        if started_on_pi:
+            offset_canvas = draw_matrix(screen, matrix, offset_canvas)
+        else:
+            draw_matrix_representation(screen)
+            pygame.display.update()

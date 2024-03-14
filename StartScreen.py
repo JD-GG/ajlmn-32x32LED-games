@@ -3,27 +3,37 @@ import pygame
 from pygame.locals import *
 import FlappyBird.settings as s
 import FlappyBird.colors as fc
-from FlappyBird.output import draw_matrix
+from FlappyBird.output import draw_matrix, draw_matrix_representation
 from FlappyBird.FlappyBird import flappy_bird_game
 import GeometryDash.Variables as v
 from GeometryDash.Main import geometry_dash_game
 from Snake.snake import snake_game
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
+
+started_on_pi = True
+try:
+    from rgbmatrix import RGBMatrix, RGBMatrixOptions
+    print("Library rgbmatrix imported successfully!")
+except ImportError:
+    started_on_pi = False
+    print("Library rgbmatrix import failed!")
 
 # This makes it so that gampad input can be used if window is not in focus
 os.environ["SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS"] = "1"
 
 # Configuration for the matrix
-options = RGBMatrixOptions()
-options.rows = 32
-options.chain_length = 1
-options.parallel = 1
-options.hardware_mapping = 'adafruit-hat'
-options.drop_privileges = 0# DONT DROP PRIVS!!!
+matrix = None
+offset_canvas = None
+if started_on_pi:
+    options = RGBMatrixOptions()
+    options.rows = 32
+    options.chain_length = 1
+    options.parallel = 1
+    options.hardware_mapping = 'adafruit-hat'
+    options.drop_privileges = 0# DONT DROP PRIVS!!!
 
-# Matrix & Canvas
-matrix = RGBMatrix(options = options)
-offset_canvas = matrix.CreateFrameCanvas()
+    # Matrix & Canvas
+    matrix = RGBMatrix(options = options)
+    offset_canvas = matrix.CreateFrameCanvas()
 
 # Init
 pygame.init()
@@ -39,7 +49,11 @@ for joystick in joysticks:
     print(f"Detected Gamepad: {joystick.get_name()}")
 
 # Setup screen for ALL GAMES
-screen = pygame.display.set_mode((s.SCREEN_WIDTH*2, s.SCREEN_HEIGHT))
+screen = None
+if started_on_pi:
+    screen = pygame.display.set_mode((s.SCREEN_WIDTH, s.SCREEN_HEIGHT))
+else:
+    screen = pygame.display.set_mode((s.SCREEN_WIDTH*2, s.SCREEN_HEIGHT))
 pygame.display.set_caption("Startscreen")
 
 SCREEN_HALF = s.SCREEN_WIDTH // 2
@@ -148,7 +162,10 @@ while(run):
     pygame.draw.rect(screen, (255, 255, 255), (select_box_x, select_box_y, SCREEN_HALF, SCREEN_HALF), s.PIXEL_WIDTH)
     #pygame.draw.rect(screen, (255, 255, 255), (SCREEN_HALF, SCREEN_HALF, SCREEN_HALF, SCREEN_HALF), s.PIXEL_WIDTH)
     
-    draw_matrix(screen, matrix, offset_canvas)
-    # pygame.display.update()
+    if started_on_pi:
+        draw_matrix(screen, matrix, offset_canvas)
+    else:
+        draw_matrix_representation(screen)
+        pygame.display.update()
 
 pygame.quit()

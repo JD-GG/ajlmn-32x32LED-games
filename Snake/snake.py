@@ -2,7 +2,12 @@ import pygame
 from pygame.locals import *
 import random
 from FlappyBird.output import draw_matrix_representation, draw_matrix
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
+
+started_on_pi = True
+try:
+    from rgbmatrix import RGBMatrix, RGBMatrixOptions
+except ImportError:
+    started_on_pi = False
 
 def snake_game(screen, matrix, offset_canvas):
     SCREEN_WIDTH = 640
@@ -95,6 +100,8 @@ def snake_game(screen, matrix, offset_canvas):
             pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(pos[0], pos[1], SNAKE_SIZE, SNAKE_SIZE))
         pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(food_pos[0], food_pos[1], FOOD_SIZE, FOOD_SIZE))
 
-        offset_canvas = draw_matrix(screen, matrix, offset_canvas)
-
-        pygame.display.update()
+        if started_on_pi:
+            offset_canvas = draw_matrix(screen, matrix, offset_canvas)
+        else:
+            draw_matrix_representation(screen)
+            pygame.display.update()

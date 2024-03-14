@@ -3,7 +3,10 @@ import pygame
 import FlappyBird.colors as c
 import FlappyBird.settings as s
 import FlappyBird.score as score
-# from rgbmatrix import RGBMatrix, RGBMatrixOptions
+try:
+    from rgbmatrix import RGBMatrix, RGBMatrixOptions
+except ImportError:
+    pass
 
 def draw_screen(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y, score):
     screen.fill(c.DARK_SKY_BLUE)
