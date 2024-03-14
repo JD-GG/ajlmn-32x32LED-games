@@ -90,6 +90,7 @@ while(run):
                 elif event.value > 0.5:
                     select_box_y = SCREEN_HALF
                     print("Down")
+        # Start selected Game
         elif event.type == pygame.KEYDOWN and event.key == K_RETURN:
             if(select_box_x == 0 and select_box_y == 0):
                 flappy_bird_game(screen, matrix, offset_canvas)
@@ -99,6 +100,7 @@ while(run):
                 geometry_dash_game(screen, matrix, offset_canvas)
             elif(select_box_x == SCREEN_HALF and select_box_y == SCREEN_HALF):
                 run = False
+        # Start selected Game
         elif event.type == pygame.JOYBUTTONDOWN and event.button != 8:
             if(select_box_x == 0 and select_box_y == 0):
                 flappy_bird_game(screen, matrix, offset_canvas)
