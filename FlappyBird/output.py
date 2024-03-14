@@ -1,4 +1,3 @@
-#! /usr/bin/env python3
 import pygame
 import FlappyBird.colors as c
 import FlappyBird.settings as s

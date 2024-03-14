@@ -1,4 +1,3 @@
-#! /usr/bin/env python3
 import pygame
 from pygame.locals import *
 from FlappyBird.mapGeneration import init_pillar_pos_x, init_pillar_pos_y, get_random_pos_y

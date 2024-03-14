@@ -1,4 +1,3 @@
-#! /usr/bin/env python3
 # This file represents the numbers for the scoring system as an array
 SCORE = [None] * 10
 SCORE[0] = [[1, 1, 1],[1, 0, 1],[1, 0, 1],[1, 0, 1],[1, 1, 1]]

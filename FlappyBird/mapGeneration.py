@@ -1,4 +1,3 @@
-#! /usr/bin/env python3
 from random import randint
 import FlappyBird.settings as s
 
