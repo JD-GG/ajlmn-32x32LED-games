@@ -61,10 +61,6 @@ SCREEN_QUARTER = s.SCREEN_WIDTH // 4
 select_box_x = 0
 select_box_y = 0
 
-x = 470
-y = 471
-r = 129
-
 run = True
 while(run):
     for event in pygame.event.get():
@@ -72,26 +68,12 @@ while(run):
             run = False
         elif event.type == pygame.KEYDOWN and event.key == K_LEFT:
             select_box_x = 0
-            #x -= 1
-            #print(x, y, r)
         elif event.type == pygame.KEYDOWN and event.key == K_RIGHT:
             select_box_x = SCREEN_HALF
-            #x += 1
-            #print(x, y, r)
         elif event.type == pygame.KEYDOWN and event.key == K_UP:
             select_box_y = 0
-            #y -= 1
-            #print(x, y, r)
         elif event.type == pygame.KEYDOWN and event.key == K_DOWN:
             select_box_y = SCREEN_HALF
-            #y += 1
-            #print(x, y, r)
-        elif event.type == pygame.KEYDOWN and event.key == K_1:
-            r -= 1
-            print(x, y, r)
-        elif event.type == pygame.KEYDOWN and event.key == K_2:
-            r += 1
-            print(x, y, r)
         # Joypad axis motion event
         elif event.type == pygame.JOYAXISMOTION:
             if event.axis == 0:
@@ -154,7 +136,7 @@ while(run):
 
     # Off Switch
     pygame.draw.rect(screen, fc.BLACK, (SCREEN_HALF, SCREEN_HALF, SCREEN_HALF, SCREEN_HALF))
-    pygame.draw.circle(screen, (255, 0, 0), (x, y), r, s.PIXEL_WIDTH)
+    pygame.draw.circle(screen, (255, 0, 0), (470, 471), 129, s.PIXEL_WIDTH)
     pygame.draw.rect(screen, fc.BLACK, (SCREEN_HALF, SCREEN_HALF, SCREEN_HALF, 60))
     pygame.draw.rect(screen, (255, 0, 0), (SCREEN_HALF + 140, SCREEN_HALF + 40, 40, 120))
 
