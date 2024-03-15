@@ -1,8 +1,8 @@
 #pcm.!default {type hw card 1}
 #ctl.!default {type hwcard 1}
 
+import os
 import pygame
-import GeometryDash.soundplayer as sound
 import GeometryDash.Variables as v
 import GeometryDash.collision as collision
 import GeometryDash.drawing as drawing
@@ -15,13 +15,21 @@ try:
 except ImportError:
     started_on_pi = False
 
+try:
+    import GeometryDash.soundplayer as sound
+except ImportError:
+    pass
 
 def geometry_dash_game(screen, matrix, offset_canvas):
+    # pygame.mixer.music.load("./GeometryDash/music.mp3")
+    # pygame.mixer.music.play(0, 1.0)
+
     clock = pygame.time.Clock()
 
-    # Song, still to be done
-    song = sound.SoundPlayer("./GeometryDash/music.mp3", 1)
-    song.play()
+    if started_on_pi:
+        # Song, still to be done
+        song = sound.SoundPlayer("./GeometryDash/music.mp3", 1)
+        song.play()
 
     run = True
     while run:
@@ -41,4 +49,6 @@ def geometry_dash_game(screen, matrix, offset_canvas):
         else:
             draw_matrix_representation(screen)
             pygame.display.update()
-    song.stop()
+
+    if started_on_pi:
+        song.stop()
