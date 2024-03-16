@@ -2,7 +2,6 @@ import pygame
 from pygame.locals import *
 import random
 from FlappyBird.output import draw_matrix_representation, draw_matrix
-
 started_on_pi = True
 try:
     from rgbmatrix import RGBMatrix, RGBMatrixOptions
@@ -12,17 +11,24 @@ except ImportError:
 def snake_game(screen, matrix, offset_canvas):
     SCREEN_WIDTH = 640
     SCREEN_HEIGHT = 640
-    SNAKE_SIZE = 20
-    FOOD_SIZE = 20
+    SNAKE_SIZE = 40
+    FOOD_SIZE = 40
     speed = 20
-
+    
     # Snake variables
     snake_pos = [[100, 50]]  # List of segments, starting with initial head position
     snake_vel = [0, 0]  # No initial movement
-    food_pos = [random.randrange(1, (SCREEN_WIDTH//SNAKE_SIZE)) * SNAKE_SIZE,
-                random.randrange(1, (SCREEN_HEIGHT//SNAKE_SIZE)) * SNAKE_SIZE]
-    food_spawn = True
     score = 0
+
+    def generate_food_position():
+        while True:
+            food_pos = [random.randrange(1, (SCREEN_WIDTH//FOOD_SIZE)) * FOOD_SIZE,
+                        random.randrange(1, (SCREEN_HEIGHT//FOOD_SIZE)) * FOOD_SIZE]
+            if food_pos not in snake_pos:
+                return food_pos
+
+    food_pos = generate_food_position()
+    food_spawn = True
 
     clock = pygame.time.Clock()
 
@@ -63,6 +69,14 @@ def snake_game(screen, matrix, offset_canvas):
             # SELECT
             elif event.type == pygame.JOYBUTTONDOWN and event.button == 8:
                 run = False
+        
+        # Add this inside your game loop where you handle the snake eating the food
+        if pygame.Rect(snake_pos[0][0], snake_pos[0][1], SNAKE_SIZE, SNAKE_SIZE).colliderect(pygame.Rect(food_pos[0], food_pos[1], FOOD_SIZE, FOOD_SIZE)):
+            score += 1
+            food_spawn = False
+        if not food_spawn:
+            food_pos = generate_food_position()
+            food_spawn = True
 
         snake_head = [snake_pos[0][0] + snake_vel[0], snake_pos[0][1] + snake_vel[1]]
 
