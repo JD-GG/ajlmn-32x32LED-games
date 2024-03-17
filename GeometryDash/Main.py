@@ -2,7 +2,7 @@
 #ctl.!default {type hwcard 1}
 
 import os
-import pygame
+import pygame,time
 import GeometryDash.Variables as v
 import GeometryDash.collision as collision
 import GeometryDash.drawing as drawing
@@ -32,23 +32,30 @@ def geometry_dash_game(screen, matrix, offset_canvas):
         song.play()
 
     run = True
-    while run:
-        #time.sleep(0.03) # 30FPS
-        tickTime = clock.tick(60) / 1000
-        v.player_vel += v.gravity * tickTime  
-        v.player_pos += v.player_vel
-        on_ground = collision.PlayerOnGround()
+    running = True
+    while running:
+        drawing.varInit()
 
-        drawing.drawPlayerGround(screen)
-        drawing.drawObstical(screen)
-        drawing.drawPercentage(screen)
-        run = userInput.checkInput(on_ground)
+        while run and running:
+            tickTime = clock.tick(60) / 1000
+            screen.fill((0, 0, 0))
+            collision.PlayerOnGround()
+            drawing.drawPlayerGround(screen)
+            run = drawing.drawObstical(screen)
+            running = userInput.checkInput()
+            drawing.drawPercentage(screen)
+
+            if started_on_pi:
+                offset_canvas = draw_matrix(screen, matrix, offset_canvas)
+            else:
+                draw_matrix_representation(screen)
+                pygame.display.update()
+
+            v.player_vel += v.gravity * tickTime  
+            v.player_pos += v.player_vel
 
         if started_on_pi:
-            offset_canvas = draw_matrix(screen, matrix, offset_canvas)
-        else:
-            draw_matrix_representation(screen)
-            pygame.display.update()
-
-    if started_on_pi:
-        song.stop()
+            song.stop()
+        run = userInput.checkAnyInput()
+        running = userInput.checkInput()
+        

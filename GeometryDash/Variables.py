@@ -26,6 +26,8 @@ obsticalGround = SCREEN_HEIGHT - GROUND - OBSTICALSIZE
 drawingPoint = 0 #dictates the point the map is at
 drawingPointevery40 = 0 #makes so drawing point only gets increased every 40 instences
 partSize = 16 #size of the parts (16x16)
+floorLevel = 1
+on_ground = False
 
 mapPartOne = [ # 0= air, 1= wall, 2= death 
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -39,9 +41,9 @@ mapPartOne = [ # 0= air, 1= wall, 2= death
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],       # 1.
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0]        # In Ground
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],       # 1.
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 2, 1]        # In Ground
 ]
 mapPartTwo = [ # 0= air, 1= wall, 2= death 
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -57,7 +59,7 @@ mapPartTwo = [ # 0= air, 1= wall, 2= death
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],       # 1.
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0]        # In Ground
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1]        # In Ground
 ]
 mapOne = [mapPartOne,mapPartTwo,mapPartOne,mapPartOne,mapPartTwo]
 

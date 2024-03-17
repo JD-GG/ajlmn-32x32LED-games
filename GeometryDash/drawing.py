@@ -1,21 +1,46 @@
-import GeometryDash.Variables as v,pygame,math
+import GeometryDash.Variables as v,pygame,math,GeometryDash.collision as c
+def varInit():
+    # Player variables
+    v.player_pos = v.SCREEN_HEIGHT/2
+    v.player_vel = 0
+    v.gravity = 25
+    v.lift = -10
+
+    # Map variabels
+    v.mapStartLength = v.PLAYERX + 500
+    v.obsticalGround = v.SCREEN_HEIGHT - v.GROUND - v.OBSTICALSIZE
+    v.drawingPoint = 0 #dictates the point the map is at
+    v.drawingPointevery40 = 0 #makes so drawing point only gets increased every 40 instences
+    v.floorLevel = 1
+
+
+
 def drawPlayerGround(screen):
 #Draw
-    screen.fill((0, 0, 0))
     pygame.draw.rect(screen, v.BLUE, (0, v.SCREEN_HEIGHT - v.GROUND, v.SCREEN_WIDTH, v.GROUND))#Ground
     pygame.draw.rect(screen, v.RED, (v.PLAYERX, v.player_pos, v.PLAYERSIZE, v.PLAYERSIZE))#Player
 
 def drawObstical(screen):
     v.mapStartLength = v.mapStartLength - v.mapSpeed
+    run = True
     for p, item in enumerate(v.mapOne):
         for i ,row in enumerate(item):
             for j, cell in enumerate(row):
                 if cell == 1:
                     x = (j*40 + v.mapStartLength) + p * (v.partSize * v.OBSTICALSIZE) #calculating x for every part of the map
                     pygame.draw.rect(screen, v.BLUE, (x, (i*40), v.OBSTICALSIZE, v.OBSTICALSIZE))
+                    Rect = pygame.Rect(x, (i*40), v.OBSTICALSIZE, v.OBSTICALSIZE)
+                    if c.PlayerHitObstical(Rect):
+                        run = False
+                
                 elif cell == 2:
                     x = (j*40 + v.mapStartLength) + p * (v.partSize * v.OBSTICALSIZE) #calculating x for every part of the map
                     pygame.draw.rect(screen, v.RED, (x, (i*40), v.OBSTICALSIZE, v.OBSTICALSIZE))
+                    Rect = pygame.Rect(x, (i*40) -1, v.OBSTICALSIZE, v.OBSTICALSIZE + 1)
+                    if c.PlayerOnDeathObstical(Rect):
+                        run = False
+    return run
+
         
 
 def drawPercentage(screen):
