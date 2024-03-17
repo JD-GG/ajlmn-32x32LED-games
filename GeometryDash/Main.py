@@ -7,7 +7,7 @@ import GeometryDash.Variables as v
 import GeometryDash.collision as collision
 import GeometryDash.drawing as drawing
 import GeometryDash.userInput as userInput
-from FlappyBird.output import draw_matrix_representation, draw_matrix
+from FlappyBird.output import draw_matrix_representation, draw_matrix, draw_matrix_grid
 
 started_on_pi = True
 try:
@@ -49,6 +49,7 @@ def geometry_dash_game(screen, matrix, offset_canvas):
                 offset_canvas = draw_matrix(screen, matrix, offset_canvas)
             else:
                 draw_matrix_representation(screen)
+                draw_matrix_grid(screen)
                 pygame.display.update()
 
             v.player_vel += v.gravity * tickTime  
