@@ -23,7 +23,7 @@ def geometry_dash_game(screen, matrix, offset_canvas):
     if started_on_pi:
         player = sound.AudioPlayer(audio_file_path)
     else:
-        pygame.mixer.music.load("./GeometryDash/music.wav")
+        pygame.mixer.music.load(audio_file_path)
         pygame.mixer.music.play(0, 1.0)
 
     run = True
