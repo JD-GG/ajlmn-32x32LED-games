@@ -5,8 +5,7 @@ def PlayerOnGround():
         v.player_pos = v.SCREEN_HEIGHT - v.GROUND - (v.PLAYERSIZE * v.floorLevel)
         v.player_vel = 0
         v.on_ground = True
-    else:
-        v.on_ground = False
+
 
 def PlayerHitObstical(Rect):
     player_hitbox = pygame.Rect(v.PLAYERX, v.player_pos, v.PLAYERSIZE, v.PLAYERSIZE)
