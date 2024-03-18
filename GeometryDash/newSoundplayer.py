@@ -13,13 +13,3 @@ class AudioPlayer:
         # Terminate the process if it's running
         if self.process:
             self.process.terminate()
-
-# Example usage
-audio_file_path = "path/to/your/audio/file.wav"
-player = AudioPlayer(audio_file_path)
-player.play()
-
-# Do stuff...
-
-# Stop playing the audio
-player.stop()

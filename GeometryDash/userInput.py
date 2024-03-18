@@ -9,9 +9,9 @@ def checkAnyInput():
             return False
         elif event.type == pygame.KEYDOWN and event.key == K_s:
             return False
-        elif event.type == pygame.KEYDOWN: 
+        elif event.type == pygame.KEYDOWN and event.key != K_s: 
             return True
-        elif event.type == pygame.JOYBUTTONDOWN:
+        elif event.type == pygame.JOYBUTTONDOWN and event.button != 8:
             return True
 def checkInput():
     for event in pygame.event.get():
