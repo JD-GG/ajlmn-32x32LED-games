@@ -35,37 +35,47 @@ def snake_game(screen, matrix, offset_canvas):
     run = True
     while run:
         clock.tick(15)  # Adjust the speed for gameplay
+        
+        direction = ""
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == K_LEFT and snake_vel[0] != speed:
+                if event.key == K_LEFT and snake_vel[0] != speed and direction != "right":
                     snake_vel = [-speed, 0]
-                elif event.key == K_RIGHT and snake_vel[0] != -speed:
+                    direction = "left"
+                elif event.key == K_RIGHT and snake_vel[0] != -speed and direction != "left":
                     snake_vel = [speed, 0]
-                elif event.key == K_UP and snake_vel[1] != speed:
+                    direction = "right"
+                elif event.key == K_UP and snake_vel[1] != speed and direction != "down":
                     snake_vel = [0, -speed]
-                elif event.key == K_DOWN and snake_vel[1] != -speed:
+                    direction = "up"
+                elif event.key == K_DOWN and snake_vel[1] != -speed and direction != "up":
                     snake_vel = [0, speed]
+                    direction = "down"
                 elif event.key == K_s:
                     run = False
             # Joypad axis motion event
             elif event.type == pygame.JOYAXISMOTION:
                 if event.axis == 0:
-                    if event.value < -0.5 and snake_vel[0] != speed:
+                    if event.value < -0.5 and snake_vel[0] != speed and direction != "right":
                         snake_vel = [-speed, 0]
                         print("Left")
-                    elif event.value > 0.5 and snake_vel[0] != -speed:
+                        direction = "left"
+                    elif event.value > 0.5 and snake_vel[0] != -speed and direction != "left":
                         snake_vel = [speed, 0]
                         print("Right")
+                        direction = "right"
                 elif event.axis == 1:
-                    if event.value < -0.5 and snake_vel[1] != speed:
+                    if event.value < -0.5 and snake_vel[1] != speed and direction != "down":
                         snake_vel = [0, -speed]
                         print("Up")
-                    elif event.value > 0.5 and snake_vel[1] != -speed:
+                        direction = "up"
+                    elif event.value > 0.5 and snake_vel[1] != -speed and direction != "up":
                         snake_vel = [0, speed]
                         print("Down")
+                        direction = "down"
             # SELECT
             elif event.type == pygame.JOYBUTTONDOWN and event.button == 8:
                 run = False
