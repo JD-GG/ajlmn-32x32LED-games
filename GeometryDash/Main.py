@@ -29,13 +29,14 @@ def geometry_dash_game(screen, matrix, offset_canvas):
     run = True
     running = True
     while running:
-        if started_on_pi:
-            player.play()
-        else:
-            pygame.mixer.music.rewind()
-            pygame.mixer.music.play(0, 1.0)
-
         drawing.varInit()
+
+        if run:
+            if started_on_pi:
+                player.play()
+            else:
+                pygame.mixer.music.rewind()
+                pygame.mixer.music.play(0, 1.0)
 
         while run and running:
             tickTime = clock.tick(60) / 1000
