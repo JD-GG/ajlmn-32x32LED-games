@@ -10,7 +10,10 @@ def PlayerOnGround():
 def PlayerHitObstical(Rect):
     player_hitbox = pygame.Rect(v.PLAYERX, v.player_pos, v.PLAYERSIZE, v.PLAYERSIZE)
     if player_hitbox.colliderect(Rect):
-        if player_hitbox.right > Rect.left and player_hitbox.left < Rect.left: #Dead
+
+        if v.player_vel > 0 and player_hitbox.right > Rect.left and player_hitbox.left < Rect.left and player_hitbox.bottom-8 > Rect.top: #Dead falling down
+            return True
+        elif v.player_vel <= 0 and player_hitbox.right > Rect.left and player_hitbox.left < Rect.left: #Dead jumping up
             return True
         elif player_hitbox.bottom > Rect.top and player_hitbox.top < Rect.top: #On Top
             v.player_pos = Rect.top - v.PLAYERSIZE
