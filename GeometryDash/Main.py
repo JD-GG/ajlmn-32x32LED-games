@@ -1,6 +1,3 @@
-#pcm.!default {type hw card 1}
-#ctl.!default {type hwcard 1}
-
 import os
 import pygame,time
 import GeometryDash.Variables as v
