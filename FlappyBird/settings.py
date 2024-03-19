@@ -12,6 +12,7 @@ PILLAR_GAP_WIDTH = 160# This is the horizontal gap between the pillars
 GROUND_HEIGHT = 80
 PIXEL_WIDTH = 20# Single pixel
 SCORE_POSITION_Y = PIXEL_WIDTH# One Pixel down
+DOWNWARD_PIXEL_PULL_OFFSET = 5
 
 # Calculated Globals (please don't touch)
 PILLAR_HEIGHT_PIXELS = PILLAR_HEIGHT // PIXEL_WIDTH# // is integer division

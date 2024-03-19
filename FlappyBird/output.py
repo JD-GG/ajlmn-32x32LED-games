@@ -20,7 +20,7 @@ def draw_matrix(screen, matrix, offset_canvas):
         for x in range(32):
             pos_x = x * s.PIXEL_WIDTH
             pos_y = y * s.PIXEL_WIDTH
-            color = screen.get_at((pos_x, pos_y))# get color in format (r, g, b, t)            
+            color = screen.get_at((pos_x, pos_y + s.DOWNWARD_PIXEL_PULL_OFFSET))# get color in format (r, g, b, t)            
             offset_canvas.SetPixel(x, y, color[0], color[1], color[2])
     return matrix.SwapOnVSync(offset_canvas)
 
@@ -30,7 +30,7 @@ def draw_matrix_representation(screen):
         for x in range(32):
             pos_x = x * s.PIXEL_WIDTH
             pos_y = y * s.PIXEL_WIDTH
-            color = screen.get_at((pos_x, pos_y))# get color in format (r, g, b, t)
+            color = screen.get_at((pos_x, pos_y + s.DOWNWARD_PIXEL_PULL_OFFSET))# get color in format (r, g, b, t)
             pygame.draw.rect(screen, color, (pos_x + s.SCREEN_WIDTH, pos_y, s.PIXEL_WIDTH, s.PIXEL_WIDTH))# Single Pixel representation
     pygame.draw.rect(screen, (0, 0, 0), (s.SCREEN_WIDTH, 0, 1, s.SCREEN_HEIGHT))# Seperating line
 
@@ -55,7 +55,7 @@ def draw_matrix_grid(screen):
         for x in range(32):
             pos_x = x * s.PIXEL_WIDTH
             pos_y = y * s.PIXEL_WIDTH
-            pygame.draw.rect(screen, (255, 0, 0), (pos_x, pos_y, 1, 1))
+            pygame.draw.rect(screen, (255, 0, 0), (pos_x, pos_y + s.DOWNWARD_PIXEL_PULL_OFFSET, 1, 1))
 
 # These markers help during programming to see where pos_x and pos_y is at any time for each object
 def draw_position_markers(screen, player_pos_x, player_pos_y, pillar_pos_x, pillar_pos_y):
