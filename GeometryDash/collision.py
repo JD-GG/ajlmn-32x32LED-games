@@ -1,8 +1,8 @@
 import GeometryDash.Variables as v,pygame,math
 # Kollisionserkennung und -behandlung
 def PlayerOnGround():
-    if v.player_pos > v.SCREEN_HEIGHT - v.GROUND - (v.PLAYERSIZE * v.floorLevel):
-        v.player_pos = v.SCREEN_HEIGHT - v.GROUND - (v.PLAYERSIZE * v.floorLevel)
+    if v.player_pos > v.SCREEN_HEIGHT - v.GROUND - (v.PLAYERSIZE):
+        v.player_pos = v.SCREEN_HEIGHT - v.GROUND - (v.PLAYERSIZE)
         v.player_vel = 0
         v.on_ground = True
 

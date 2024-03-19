@@ -11,7 +11,6 @@ def varInit():
     v.obsticalGround = v.SCREEN_HEIGHT - v.GROUND - v.OBSTICALSIZE
     v.drawingPoint = 0 #dictates the point the map is at
     v.drawingPointevery40 = 0 #makes so drawing point only gets increased every 40 instences
-    v.floorLevel = 1
 
 
 

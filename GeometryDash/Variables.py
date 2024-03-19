@@ -26,7 +26,6 @@ obsticalGround = SCREEN_HEIGHT - GROUND - OBSTICALSIZE
 drawingPoint = 0 #dictates the point the map is at
 drawingPointevery40 = 0 #makes so drawing point only gets increased every 40 instences
 partSize = 16 #size of the parts (16x16)
-floorLevel = 1
 on_ground = False
 
 mapPartOne = [ # 0= air, 1= wall, 2= death 
