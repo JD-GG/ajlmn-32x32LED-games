@@ -138,7 +138,7 @@ while(run):
 
     # Off Switch
     pygame.draw.rect(screen, fc.BLACK, (SCREEN_HALF, SCREEN_HALF, SCREEN_HALF, SCREEN_HALF))
-    pygame.draw.circle(screen, (255, 0, 0), (470, 471), 129, s.PIXEL_WIDTH)
+    pygame.draw.circle(screen, (255, 0, 0), (470, 471 + s.DOWNWARD_PIXEL_PULL_OFFSET), 129, s.PIXEL_WIDTH)
     pygame.draw.rect(screen, fc.BLACK, (SCREEN_HALF, SCREEN_HALF, SCREEN_HALF, 60))
     pygame.draw.rect(screen, (255, 0, 0), (SCREEN_HALF + 140, SCREEN_HALF + 40, 40, 120))
 
