@@ -80,7 +80,7 @@ def snake_game(screen, matrix, offset_canvas):
             elif event.type == pygame.JOYBUTTONDOWN and event.button == 8:
                 run = False
         
-        # Add this inside your game loop where you handle the snake eating the food
+        
         if pygame.Rect(snake_pos[0][0], snake_pos[0][1], SNAKE_SIZE, SNAKE_SIZE).colliderect(pygame.Rect(food_pos[0], food_pos[1], FOOD_SIZE, FOOD_SIZE)):
             score += 1
             food_spawn = False
