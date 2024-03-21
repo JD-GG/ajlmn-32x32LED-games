@@ -17,7 +17,12 @@ def varInit():
 def drawPlayerGround(screen):
 #Draw
     pygame.draw.rect(screen, v.BLUE, (0, v.SCREEN_HEIGHT - v.GROUND, v.SCREEN_WIDTH, v.GROUND))#Ground
-    pygame.draw.rect(screen, v.RED, (v.PLAYERX, v.player_pos, v.PLAYERSIZE, v.PLAYERSIZE))#Player
+    pygame.draw.rect(screen, v.WHITE, (v.PLAYERX, v.player_pos, v.PLAYERSIZE, v.PLAYERSIZE))#Player
+
+def drawPlayerGround2(screen2):
+#Draw
+    pygame.draw.rect(screen2, v.GREEN, (5, v.SCREEN_HEIGHT - v.GROUND, v.SCREEN_WIDTH, v.GROUND))#Ground2
+    pygame.draw.rect(screen2, v.WHITE, (v.PLAYERX, v.player_pos, v.PLAYERSIZE, v.PLAYERSIZE))#Player
 
 def drawObstical(screen):
     v.mapStartLength = v.mapStartLength - v.mapSpeed
@@ -35,6 +40,13 @@ def drawObstical(screen):
                 elif cell == 2:
                     x = (j*40 + v.mapStartLength) + p * (v.partSize * v.OBSTICALSIZE) #calculating x for every part of the map
                     pygame.draw.rect(screen, v.RED, (x, (i*40), v.OBSTICALSIZE, v.OBSTICALSIZE))
+                    Rect = pygame.Rect(x, (i*40) -1, v.OBSTICALSIZE, v.OBSTICALSIZE + 1)
+                    if c.PlayerOnDeathObstical(Rect):
+                        run = False
+                
+                elif cell == 5:
+                    x = (j*40 + v.mapStartLength) + p * (v.partSize * v.OBSTICALSIZE) #calculating x for every part of the map
+                    pygame.draw.rect(screen, v.GREEN, (x, (i*40), v.OBSTICALSIZE, v.OBSTICALSIZE))
                     Rect = pygame.Rect(x, (i*40) -1, v.OBSTICALSIZE, v.OBSTICALSIZE + 1)
                     if c.PlayerOnDeathObstical(Rect):
                         run = False
