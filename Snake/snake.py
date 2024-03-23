@@ -49,6 +49,15 @@ def snake_game(screen, matrix, offset_canvas):
             self.head.x += self.xdir * BLOCK_SIZE
             self.head.y += self.ydir * BLOCK_SIZE
             self.body.remove(self.head)
+            
+            if self.head.x < 0:
+                self.head.x = SCREEN_WIDTH - BLOCK_SIZE
+            elif self.head.x >= SCREEN_WIDTH:
+                self.head.x = 0
+            if self.head.y < 0:
+                self.head.y = SCREEN_HEIGHT - BLOCK_SIZE
+            elif self.head.y >= SCREEN_HEIGHT:
+                self.head.y = 0
 
     class Apple:
         def __init__(self):
@@ -59,13 +68,7 @@ def snake_game(screen, matrix, offset_canvas):
         def update(self):
             pygame.draw.rect(screen, "red", self.rect)
 
-    def drawGrid():
-        for x in range(0, SCREEN_WIDTH, BLOCK_SIZE):
-            for y in range(0, SCREEN_HEIGHT, BLOCK_SIZE):
-                rect = pygame.Rect(x, y, BLOCK_SIZE, BLOCK_SIZE)
-                pygame.draw.rect(screen, "black", rect, 1)
-
-    drawGrid()
+    
 
     snake = Snake()
     apple = Apple()
@@ -119,7 +122,6 @@ def snake_game(screen, matrix, offset_canvas):
         snake.update()
         
         screen.fill('black')
-        drawGrid()
 
         apple.update()
 
@@ -137,4 +139,4 @@ def snake_game(screen, matrix, offset_canvas):
         else:
             draw_matrix_representation(screen)
             pygame.display.update()
-        clock.tick(15)
+        clock.tick(10)
