@@ -11,121 +11,130 @@ except ImportError:
 def snake_game(screen, matrix, offset_canvas):
     SCREEN_WIDTH = 640
     SCREEN_HEIGHT = 640
-    SNAKE_SIZE = 40
-    FOOD_SIZE = 40
-    speed = 20
-    
-    # Snake variables
-    snake_pos = [[100, 50]]  # List of segments, starting with initial head position
-    snake_vel = [0, 0]  # No initial movement
-    score = 0
+    BLOCK_SIZE = 40
 
-    def generate_food_position():
-        while True:
-            food_pos = [random.randrange(1, (SCREEN_WIDTH//FOOD_SIZE)) * FOOD_SIZE,
-                        random.randrange(1, (SCREEN_HEIGHT//FOOD_SIZE)) * FOOD_SIZE]
-            if food_pos not in snake_pos:
-                return food_pos
-
-    food_pos = generate_food_position()
-    food_spawn = True
-
+    screen = pygame.display.set_mode((640, 640))
     clock = pygame.time.Clock()
+
+    class Snake:
+        def __init__(self):
+            self.x, self.y = BLOCK_SIZE, BLOCK_SIZE
+            self.xdir = 1
+            self.ydir = 0
+            self.head = pygame.Rect(self.x, self.y, BLOCK_SIZE, BLOCK_SIZE)
+            self.body = [pygame.Rect(self.x-BLOCK_SIZE, self.y, BLOCK_SIZE, BLOCK_SIZE)]
+            self.dead = False
+        
+        def update(self):
+            global apple
+            
+            for square in self.body:
+                if self.head.x == square.x and self.head.y == square.y:
+                    self.dead = True
+                if self.head.x not in range(0, SCREEN_WIDTH) or self.head.y not in range(0, SCREEN_HEIGHT):
+                    self.dead = True
+            
+            if self.dead:
+                self.x, self.y = BLOCK_SIZE, BLOCK_SIZE
+                self.head = pygame.Rect(self.x, self.y, BLOCK_SIZE, BLOCK_SIZE)
+                self.body = [pygame.Rect(self.x-BLOCK_SIZE, self.y, BLOCK_SIZE, BLOCK_SIZE)]
+                self.xdir = 1
+                self.ydir = 0
+                self.dead = False
+                apple = Apple()
+            
+            self.body.append(self.head)
+            for i in range(len(self.body)-1):
+                self.body[i].x, self.body[i].y = self.body[i+1].x, self.body[i+1].y
+            self.head.x += self.xdir * BLOCK_SIZE
+            self.head.y += self.ydir * BLOCK_SIZE
+            self.body.remove(self.head)
+
+    class Apple:
+        def __init__(self):
+            self.x = int(random.randint(0, SCREEN_WIDTH)/BLOCK_SIZE) * BLOCK_SIZE
+            self.y = int(random.randint(0, SCREEN_HEIGHT)/BLOCK_SIZE) * BLOCK_SIZE
+            self.rect = pygame.Rect(self.x, self.y, BLOCK_SIZE, BLOCK_SIZE)
+        
+        def update(self):
+            pygame.draw.rect(screen, "red", self.rect)
+
+    def drawGrid():
+        for x in range(0, SCREEN_WIDTH, BLOCK_SIZE):
+            for y in range(0, SCREEN_HEIGHT, BLOCK_SIZE):
+                rect = pygame.Rect(x, y, BLOCK_SIZE, BLOCK_SIZE)
+                pygame.draw.rect(screen, "black", rect, 1)
+
+    drawGrid()
+
+    snake = Snake()
+    apple = Apple()
 
     run = True
     while run:
-        clock.tick(15)  # Adjust the speed for gameplay
-        
-        direction = ""
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == K_LEFT and snake_vel[0] != speed and direction != "right":
-                    snake_vel = [-speed, 0]
-                    direction = "left"
-                elif event.key == K_RIGHT and snake_vel[0] != -speed and direction != "left":
-                    snake_vel = [speed, 0]
-                    direction = "right"
-                elif event.key == K_UP and snake_vel[1] != speed and direction != "down":
-                    snake_vel = [0, -speed]
-                    direction = "up"
-                elif event.key == K_DOWN and snake_vel[1] != -speed and direction != "up":
-                    snake_vel = [0, speed]
-                    direction = "down"
-                elif event.key == K_s:
+                if event.key == pygame.K_LEFT:
+                    snake.ydir = 0
+                    snake.xdir = -1
+                elif event.key == pygame.K_RIGHT:
+                    snake.ydir = 0
+                    snake.xdir = 1
+                elif event.key == pygame.K_UP:
+                    snake.ydir = -1
+                    snake.xdir = 0
+                elif event.key == pygame.K_DOWN:
+                    snake.ydir = 1
+                    snake.xdir = 0
+                elif event.key == pygame.K_s:
                     run = False
+            
             # Joypad axis motion event
             elif event.type == pygame.JOYAXISMOTION:
                 if event.axis == 0:
-                    if event.value < -0.5 and snake_vel[0] != speed and direction != "right":
-                        snake_vel = [-speed, 0]
+                    if event.value < -0.5:
+                        snake.ydir = 0
+                        snake.xdir = -1
                         print("Left")
-                        direction = "left"
-                    elif event.value > 0.5 and snake_vel[0] != -speed and direction != "left":
-                        snake_vel = [speed, 0]
+                    elif event.value > 0.5:
+                        snake.ydir = 0
+                        snake.xdir = 1
                         print("Right")
-                        direction = "right"
                 elif event.axis == 1:
-                    if event.value < -0.5 and snake_vel[1] != speed and direction != "down":
-                        snake_vel = [0, -speed]
+                    if event.value < -0.5:
+                        snake.ydir = -1
+                        snake.xdir = 0
                         print("Up")
-                        direction = "up"
-                    elif event.value > 0.5 and snake_vel[1] != -speed and direction != "up":
-                        snake_vel = [0, speed]
+                    elif event.value > 0.5:
+                        snake.ydir = 1
+                        snake.xdir = 0
                         print("Down")
-                        direction = "down"
+
             # SELECT
             elif event.type == pygame.JOYBUTTONDOWN and event.button == 8:
                 run = False
+
+        snake.update()
         
-        
-        if pygame.Rect(snake_pos[0][0], snake_pos[0][1], SNAKE_SIZE, SNAKE_SIZE).colliderect(pygame.Rect(food_pos[0], food_pos[1], FOOD_SIZE, FOOD_SIZE)):
-            score += 1
-            food_spawn = False
-        if not food_spawn:
-            food_pos = generate_food_position()
-            food_spawn = True
+        screen.fill('black')
+        drawGrid()
 
-        snake_head = [snake_pos[0][0] + snake_vel[0], snake_pos[0][1] + snake_vel[1]]
+        apple.update()
 
-        # Prevent snake from going off screen
-        if snake_head[0] >= SCREEN_WIDTH:
-            snake_head[0] = 0
-        elif snake_head[0] < 0:
-            snake_head[0] = SCREEN_WIDTH - SNAKE_SIZE
-        if snake_head[1] >= SCREEN_HEIGHT:
-            snake_head[1] = 0
-        elif snake_head[1] < 0:
-            snake_head[1] = SCREEN_HEIGHT - SNAKE_SIZE
+        pygame.draw.rect(screen, "green", snake.head)
 
-        snake_pos.insert(0, snake_head)  # Update snake position
+        for square in snake.body:
+            pygame.draw.rect(screen, "green", square)
 
-        # Eating food
-        if abs(snake_head[0] - food_pos[0]) < SNAKE_SIZE and abs(snake_head[1] - food_pos[1]) < SNAKE_SIZE:
-            score += 1
-            food_spawn = False
-        else:
-            snake_pos.pop()
-
-        if not food_spawn:
-            food_pos = [random.randrange(1, (SCREEN_WIDTH//FOOD_SIZE)) * FOOD_SIZE,
-                        random.randrange(1, (SCREEN_HEIGHT//FOOD_SIZE)) * FOOD_SIZE]
-        food_spawn = True
-
-        # Game Over if snake collides with itself
-        for block in snake_pos[1:]:
-            if snake_head == block:
-                run = False
-
-        screen.fill((0, 0, 0))
-        for pos in snake_pos:
-            pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(pos[0], pos[1], SNAKE_SIZE, SNAKE_SIZE))
-        pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(food_pos[0], food_pos[1], FOOD_SIZE, FOOD_SIZE))
+        if snake.head.x == apple.x and snake.head.y == apple.y:
+            snake.body.append(pygame.Rect(square.x, square.y, BLOCK_SIZE, BLOCK_SIZE))
+            apple = Apple()
 
         if started_on_pi:
             offset_canvas = draw_matrix(screen, matrix, offset_canvas)
         else:
             draw_matrix_representation(screen)
             pygame.display.update()
+        clock.tick(15)
