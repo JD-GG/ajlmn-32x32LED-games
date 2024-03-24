@@ -85,15 +85,23 @@ def snake_game(screen, matrix, offset_canvas):
                 run = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
+                    if snake.xdir == 1:
+                        break
                     snake.ydir = 0
                     snake.xdir = -1
                 elif event.key == pygame.K_RIGHT:
+                    if snake.xdir == -1:
+                        break
                     snake.ydir = 0
                     snake.xdir = 1
                 elif event.key == pygame.K_UP:
+                    if snake.ydir == 1:
+                        break
                     snake.ydir = -1
                     snake.xdir = 0
                 elif event.key == pygame.K_DOWN:
+                    if snake.ydir == -1:
+                        break
                     snake.ydir = 1
                     snake.xdir = 0
                 elif event.key == pygame.K_s:
@@ -103,19 +111,27 @@ def snake_game(screen, matrix, offset_canvas):
             elif event.type == pygame.JOYAXISMOTION:
                 if event.axis == 0:
                     if event.value < -0.5:
+                        if snake.xdir == 1:
+                            break
                         snake.ydir = 0
                         snake.xdir = -1
                         print("Left")
                     elif event.value > 0.5:
+                        if snake.xdir == -1:
+                            break
                         snake.ydir = 0
                         snake.xdir = 1
                         print("Right")
                 elif event.axis == 1:
                     if event.value < -0.5:
+                        if snake.ydir == 1:
+                            break
                         snake.ydir = -1
                         snake.xdir = 0
                         print("Up")
                     elif event.value > 0.5:
+                        if snake.ydir == -1:
+                            break
                         snake.ydir = 1
                         snake.xdir = 0
                         print("Down")
