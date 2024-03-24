@@ -9,6 +9,8 @@ except ImportError:
     started_on_pi = False
 
 def snake_game(screen, matrix, offset_canvas):
+    
+    #sets game dimensions
     SCREEN_WIDTH = 640
     SCREEN_HEIGHT = 640
     BLOCK_SIZE = 40
@@ -16,6 +18,7 @@ def snake_game(screen, matrix, offset_canvas):
     screen = pygame.display.set_mode((640, 640))
     clock = pygame.time.Clock()
 
+    #defines the snake class, with, updates position, checks for collision, and checks for apple collision
     class Snake:
         def __init__(self):
             self.x, self.y = BLOCK_SIZE, BLOCK_SIZE
@@ -59,6 +62,7 @@ def snake_game(screen, matrix, offset_canvas):
             elif self.head.y >= SCREEN_HEIGHT:
                 self.head.y = 0
 
+    #defines the apple class, with, updates position
     class Apple:
         def __init__(self):
             self.x = int(random.randint(0, SCREEN_WIDTH)/BLOCK_SIZE) * BLOCK_SIZE
@@ -73,6 +77,7 @@ def snake_game(screen, matrix, offset_canvas):
     snake = Snake()
     apple = Apple()
 
+    #game loop that updates the screen, and checks for input
     run = True
     while run:
         for event in pygame.event.get():
@@ -94,7 +99,7 @@ def snake_game(screen, matrix, offset_canvas):
                 elif event.key == pygame.K_s:
                     run = False
             
-            # Joypad axis motion event
+            #Joypad axis motion event
             elif event.type == pygame.JOYAXISMOTION:
                 if event.axis == 0:
                     if event.value < -0.5:
@@ -134,6 +139,7 @@ def snake_game(screen, matrix, offset_canvas):
             snake.body.append(pygame.Rect(square.x, square.y, BLOCK_SIZE, BLOCK_SIZE))
             apple = Apple()
 
+        #draws the screen
         if started_on_pi:
             offset_canvas = draw_matrix(screen, matrix, offset_canvas)
         else:
