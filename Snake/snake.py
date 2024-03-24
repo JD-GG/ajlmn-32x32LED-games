@@ -15,7 +15,6 @@ def snake_game(screen, matrix, offset_canvas):
     SCREEN_HEIGHT = 640
     BLOCK_SIZE = 40
 
-    screen = pygame.display.set_mode((640, 640))
     clock = pygame.time.Clock()
 
     #defines the snake class, with, updates position, checks for collision, and checks for apple collision
