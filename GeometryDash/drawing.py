@@ -15,19 +15,19 @@ def varInit():
 
 
 def drawPlayerGround(screen):
-#Draw
+#Blue
     pygame.draw.rect(screen, v.BLUE, (0, v.SCREEN_HEIGHT - v.GROUND, v.SCREEN_WIDTH, v.GROUND))#Ground
     pygame.draw.rect(screen, v.WHITE, (v.PLAYERX, v.player_pos, v.PLAYERSIZE, v.PLAYERSIZE))#Player
 
 def drawPlayerGround2(screen2):
-#Draw
+#Green
     pygame.draw.rect(screen2, v.GREEN, (5, v.SCREEN_HEIGHT - v.GROUND, v.SCREEN_WIDTH, v.GROUND))#Ground2
     pygame.draw.rect(screen2, v.WHITE, (v.PLAYERX, v.player_pos, v.PLAYERSIZE, v.PLAYERSIZE))#Player
 
 def drawObstical(screen):
     v.mapStartLength = v.mapStartLength - v.mapSpeed
     run = True
-    for p, item in enumerate(v.mapOne):
+    for p, item in enumerate(v.mapOne):# maps
         for i ,row in enumerate(item):# y
             for j, cell in enumerate(row):# x
                 if cell == 1 or cell == 2 or cell == 5:

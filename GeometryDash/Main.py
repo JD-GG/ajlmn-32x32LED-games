@@ -19,7 +19,7 @@ def geometry_dash_game(screen, matrix, offset_canvas):
     death_file_path = "./GeometryDash/death.wav"
     music_player = None
     death_player = None
-    first_death_loop = False
+    musicDeath = False
     if started_on_pi:
         music_player = sound.AudioPlayer(audio_file_path)
         death_player = sound.AudioPlayer(death_file_path)
@@ -39,7 +39,7 @@ def geometry_dash_game(screen, matrix, offset_canvas):
                 pygame.mixer.music.play(0, 1.0)
 
         while run and running:
-            first_death_loop = True
+            musicDeath = True
 
             tickTime = clock.tick(60) / 1000
             screen.fill((0, 0, 0))
@@ -59,14 +59,14 @@ def geometry_dash_game(screen, matrix, offset_canvas):
             v.player_vel += v.gravity * tickTime  
             v.player_pos += v.player_vel
 
-        if started_on_pi and first_death_loop:
+        if started_on_pi and musicDeath:
             music_player.stop()
             death_player.play()
-        elif first_death_loop:
+        elif musicDeath:
             pygame.mixer.music.stop()
             pygame.mixer.music.load(death_file_path)
             pygame.mixer.music.play(0, 1.0)
-        first_death_loop = False
+        musicDeath = False
 
         run = userInput.checkAnyInput()
         running = userInput.checkInput()
