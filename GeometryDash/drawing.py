@@ -28,28 +28,26 @@ def drawObstical(screen):
     v.mapStartLength = v.mapStartLength - v.mapSpeed
     run = True
     for p, item in enumerate(v.mapOne):
-        for i ,row in enumerate(item):
-            for j, cell in enumerate(row):
-                if cell == 1:
+        for i ,row in enumerate(item):# y
+            for j, cell in enumerate(row):# x
+                if cell == 1 or cell == 2 or cell == 5:
                     x = (j*40 + v.mapStartLength) + p * (v.partSize * v.OBSTICALSIZE) #calculating x for every part of the map
-                    pygame.draw.rect(screen, v.BLUE, (x, (i*40), v.OBSTICALSIZE, v.OBSTICALSIZE))
-                    Rect = pygame.Rect(x, (i*40), v.OBSTICALSIZE, v.OBSTICALSIZE)
-                    if c.PlayerHitObstical(Rect):
-                        run = False
-                
-                elif cell == 2:
-                    x = (j*40 + v.mapStartLength) + p * (v.partSize * v.OBSTICALSIZE) #calculating x for every part of the map
-                    pygame.draw.rect(screen, v.RED, (x, (i*40), v.OBSTICALSIZE, v.OBSTICALSIZE))
-                    Rect = pygame.Rect(x, (i*40) -1, v.OBSTICALSIZE, v.OBSTICALSIZE + 1)
-                    if c.PlayerOnDeathObstical(Rect):
-                        run = False
-                
-                elif cell == 5:
-                    x = (j*40 + v.mapStartLength) + p * (v.partSize * v.OBSTICALSIZE) #calculating x for every part of the map
-                    pygame.draw.rect(screen, v.GREEN, (x, (i*40), v.OBSTICALSIZE, v.OBSTICALSIZE))
-                    Rect = pygame.Rect(x, (i*40) -1, v.OBSTICALSIZE, v.OBSTICALSIZE + 1)
-                    if c.PlayerOnDeathObstical(Rect):
-                        run = False
+                    if x > -v.OBSTICALSIZE and x < 640:
+                        if cell == 1:
+                            pygame.draw.rect(screen, v.BLUE, (x, (i*40), v.OBSTICALSIZE, v.OBSTICALSIZE))
+                            Rect = pygame.Rect(x, (i*40), v.OBSTICALSIZE, v.OBSTICALSIZE)
+                            if c.PlayerHitObstical(Rect):
+                                run = False
+                        elif cell == 2:
+                            pygame.draw.rect(screen, v.RED, (x, (i*40), v.OBSTICALSIZE, v.OBSTICALSIZE))
+                            Rect = pygame.Rect(x, (i*40) -1, v.OBSTICALSIZE, v.OBSTICALSIZE + 1)
+                            if c.PlayerOnDeathObstical(Rect):
+                                run = False
+                        elif cell == 5:
+                            pygame.draw.rect(screen, v.GREEN, (x, (i*40), v.OBSTICALSIZE, v.OBSTICALSIZE))
+                            Rect = pygame.Rect(x, (i*40) -1, v.OBSTICALSIZE, v.OBSTICALSIZE + 1)
+                            if c.PlayerOnDeathObstical(Rect):
+                                run = False
     return run
 
         
