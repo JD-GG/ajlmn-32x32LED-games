@@ -86,26 +86,26 @@ def snake_game(screen, matrix, offset_canvas):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT and not event_thrown:
+            elif event.type == pygame.KEYDOWN and not event_thrown:
+                if event.key == pygame.K_LEFT:
                     if snake.xdir == 1:
                         break
                     snake.ydir = 0
                     snake.xdir = -1
                     event_thrown = True
-                elif event.key == pygame.K_RIGHT and not event_thrown:
+                elif event.key == pygame.K_RIGHT:
                     if snake.xdir == -1:
                         break
                     snake.ydir = 0
                     snake.xdir = 1
                     event_thrown = True
-                elif event.key == pygame.K_UP and not event_thrown:
+                elif event.key == pygame.K_UP:
                     if snake.ydir == 1:
                         break
                     snake.ydir = -1
                     snake.xdir = 0
                     event_thrown = True
-                elif event.key == pygame.K_DOWN and not event_thrown:
+                elif event.key == pygame.K_DOWN:
                     if snake.ydir == -1:
                         break
                     snake.ydir = 1
@@ -115,16 +115,16 @@ def snake_game(screen, matrix, offset_canvas):
                     run = False
             
             #Joypad axis motion event
-            elif event.type == pygame.JOYAXISMOTION:
+            elif event.type == pygame.JOYAXISMOTION and not event_thrown:
                 if event.axis == 0:
-                    if event.value < -0.5 and not event_thrown:
+                    if event.value < -0.5:
                         if snake.xdir == 1:
                             break
                         snake.ydir = 0
                         snake.xdir = -1
                         event_thrown = True
                         print("Left")
-                    elif event.value > 0.5 and not event_thrown:
+                    elif event.value > 0.5:
                         if snake.xdir == -1:
                             break
                         snake.ydir = 0
@@ -132,14 +132,14 @@ def snake_game(screen, matrix, offset_canvas):
                         event_thrown = True
                         print("Right")
                 elif event.axis == 1:
-                    if event.value < -0.5 and not event_thrown:
+                    if event.value < -0.5:
                         if snake.ydir == 1:
                             break
                         snake.ydir = -1
                         snake.xdir = 0
                         event_thrown = True
                         print("Up")
-                    elif event.value > 0.5 and not event_thrown:
+                    elif event.value > 0.5:
                         if snake.ydir == -1:
                             break
                         snake.ydir = 1
