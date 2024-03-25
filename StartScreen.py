@@ -123,8 +123,10 @@ while(run):
 
     # Geometry Dash Mockup
     pygame.draw.rect(screen, fc.BLACK, (SCREEN_HALF, 0, SCREEN_HALF, SCREEN_HALF))
-    pygame.draw.rect(screen, v.GREEN, (SCREEN_HALF, SCREEN_HALF - v.GROUND, SCREEN_HALF, v.GROUND))
-    pygame.draw.rect(screen, v.RED, (SCREEN_HALF + 60, 180, s.PLAYER_WIDTH, s.PLAYER_WIDTH))
+    pygame.draw.rect(screen, v.BLUE, (SCREEN_HALF, 250, SCREEN_HALF, 100))
+    pygame.draw.rect(screen, v.WHITE, (SCREEN_HALF + 120, 100, s.PLAYER_WIDTH, s.PLAYER_WIDTH))
+    pygame.draw.rect(screen, v.BLUE, (SCREEN_HALF + 180, 160, 100, s.PLAYER_WIDTH))
+    pygame.draw.rect(screen, v.RED, (SCREEN_HALF + s.PLAYER_WIDTH, 250, s.PLAYER_WIDTH, s.PLAYER_WIDTH))
     
     # Snake Mockup
     pygame.draw.rect(screen, fc.BLACK, (0, SCREEN_HALF, SCREEN_HALF, SCREEN_HALF))
