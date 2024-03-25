@@ -155,4 +155,5 @@ while(run):
         pygame.display.update()
 
 pygame.quit()
-os.system("sudo shutdown -h now")
+if started_on_pi:
+    os.system("sudo shutdown -h now")
