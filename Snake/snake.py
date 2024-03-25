@@ -37,7 +37,7 @@ def snake_game(screen, matrix, offset_canvas):
                 if self.head.x not in range(0, SCREEN_WIDTH) or self.head.y not in range(0, SCREEN_HEIGHT):
                     self.dead = True
                     
-            
+            # defines what happens when the snake dies
             if self.dead:
                 self.x, self.y = BLOCK_SIZE, BLOCK_SIZE
                 self.head = pygame.Rect(self.x, self.y, BLOCK_SIZE, BLOCK_SIZE)
