@@ -1,0 +1,36 @@
+Raspberry Pi OS (64 Bit)
+sudo apt update
+sudo apt upgrade
+sudo apt install python3 python3-pip
+(pygame preinstalled?)
+curl https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/main/
+rgb-matrix.sh >rgb-matrix.sh
+sudo bash rgb-matrix.sh
+	> Continue Y
+	> Select 2 Hat + RTC
+	> Select 1 Quality (Requires soldering)
+cd ~
+git clone https://github.com/JD-GG/ajlmn-32x32LED-games.git
+sudo nano /etc/systemd/system/MatrixGames.service
+	[Unit]
+	Description=MatrixGames
+	After=multi-user.target
+	
+	[Service]
+	Type=simple
+	ExecStart=/usr/bin/python3 /home/pi/ajlmn-32x32LED-games/StartScreen.py
+	WorkingDirectory=/home/ajlmn-32x32LED-games/
+	Restart=on-failure
+	
+	[Install]
+	WantedBy=multi-user.target
+sudo systemctl enable MatrixGames.service
+sudo nano /usr/share/alsa/alsa.conf
+	<<<
+	defaults.ctl.card 0
+	defaults.pcm.card 0
+	>>>
+	defaults.ctl.card 1
+	defaults.pcm.card 1
+sudo nano /etc/modprobe.d/raspi-blacklist.conf
+	blacklist snd_bcm2835
