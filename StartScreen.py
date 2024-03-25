@@ -155,3 +155,4 @@ while(run):
         pygame.display.update()
 
 pygame.quit()
+os.system("sudo shutdown -h now")
