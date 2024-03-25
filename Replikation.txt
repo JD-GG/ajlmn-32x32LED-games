@@ -24,6 +24,7 @@ sudo nano /etc/systemd/system/MatrixGames.service
 	
 	[Install]
 	WantedBy=multi-user.target
+sudo systemctl daemon-reload
 sudo systemctl enable MatrixGames.service
 sudo nano /usr/share/alsa/alsa.conf
 	<<<
