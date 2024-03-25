@@ -41,7 +41,7 @@ def geometry_dash_game(screen, matrix, offset_canvas):
         while run and running:
             first_death_loop = True
 
-            tickTime = clock.tick(80) / 1000
+            tickTime = clock.tick(100) / 1000
             screen.fill((0, 0, 0))
             collision.PlayerOnGround()
             drawing.drawPlayerGround(screen)
