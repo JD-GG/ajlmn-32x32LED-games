@@ -17,7 +17,7 @@ WHITE = (255, 255, 255)
 player_pos = SCREEN_HEIGHT/2
 player_vel = 0
 gravity = 25
-lift = -20
+lift = -10
 
 # Map variabels
 mapStartLength = PLAYERX + 500
