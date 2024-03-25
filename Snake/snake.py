@@ -33,8 +33,10 @@ def snake_game(screen, matrix, offset_canvas):
             for square in self.body:
                 if self.head.x == square.x and self.head.y == square.y:
                     self.dead = True
+                    print("You died!")
                 if self.head.x not in range(0, SCREEN_WIDTH) or self.head.y not in range(0, SCREEN_HEIGHT):
                     self.dead = True
+                    
             
             if self.dead:
                 self.x, self.y = BLOCK_SIZE, BLOCK_SIZE
@@ -75,6 +77,8 @@ def snake_game(screen, matrix, offset_canvas):
 
     snake = Snake()
     apple = Apple()
+    
+    event_thrown = False
 
     #game loop that updates the screen, and checks for input
     run = True
@@ -83,61 +87,71 @@ def snake_game(screen, matrix, offset_canvas):
             if event.type == pygame.QUIT:
                 run = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
+                if event.key == pygame.K_LEFT and not event_thrown:
                     if snake.xdir == 1:
                         break
                     snake.ydir = 0
                     snake.xdir = -1
-                elif event.key == pygame.K_RIGHT:
+                    event_thrown = True
+                elif event.key == pygame.K_RIGHT and not event_thrown:
                     if snake.xdir == -1:
                         break
                     snake.ydir = 0
                     snake.xdir = 1
-                elif event.key == pygame.K_UP:
+                    event_thrown = True
+                elif event.key == pygame.K_UP and not event_thrown:
                     if snake.ydir == 1:
                         break
                     snake.ydir = -1
                     snake.xdir = 0
-                elif event.key == pygame.K_DOWN:
+                    event_thrown = True
+                elif event.key == pygame.K_DOWN and not event_thrown:
                     if snake.ydir == -1:
                         break
                     snake.ydir = 1
                     snake.xdir = 0
+                    event_thrown = True
                 elif event.key == pygame.K_s:
                     run = False
             
             #Joypad axis motion event
             elif event.type == pygame.JOYAXISMOTION:
                 if event.axis == 0:
-                    if event.value < -0.5:
+                    if event.value < -0.5 and not event_thrown:
                         if snake.xdir == 1:
                             break
                         snake.ydir = 0
                         snake.xdir = -1
+                        event_thrown = True
                         print("Left")
-                    elif event.value > 0.5:
+                    elif event.value > 0.5 and not event_thrown:
                         if snake.xdir == -1:
                             break
                         snake.ydir = 0
                         snake.xdir = 1
+                        event_thrown = True
                         print("Right")
                 elif event.axis == 1:
-                    if event.value < -0.5:
+                    if event.value < -0.5 and not event_thrown:
                         if snake.ydir == 1:
                             break
                         snake.ydir = -1
                         snake.xdir = 0
+                        event_thrown = True
                         print("Up")
-                    elif event.value > 0.5:
+                    elif event.value > 0.5 and not event_thrown:
                         if snake.ydir == -1:
                             break
                         snake.ydir = 1
                         snake.xdir = 0
+                        event_thrown = True
                         print("Down")
 
             # SELECT
             elif event.type == pygame.JOYBUTTONDOWN and event.button == 8:
                 run = False
+
+        event_thrown = False
 
         snake.update()
         
