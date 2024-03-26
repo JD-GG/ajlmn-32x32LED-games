@@ -16,6 +16,82 @@ Zum steuern werden immer alle Knöpfe (außer SELECT) als input gewertet. Oder d
 
 Das gesammte Programm verhält sich unterschiedlich wenn es auf dem PI oder auf einem PC gestartet geworden ist. Dies erleichterte den development Prozess und benötigt keine unnötigen Resourcen auf dem PI/PC.
 
+## StartScreen.py
+Logik für die Erkennung des Gerätes
+```Python
+started_on_pi = True
+try:
+    from rgbmatrix import RGBMatrix, RGBMatrixOptions
+    print("Library rgbmatrix imported successfully!")
+except ImportError:
+    started_on_pi = False
+    print("Library rgbmatrix import failed!")
+```
+Gemeinsam genutze Matrix und canvas
+```Python
+# Configuration for the matrix
+matrix = None
+offset_canvas = None
+if started_on_pi:
+    options = RGBMatrixOptions()
+    options.rows = 32
+    options.chain_length = 1
+    options.parallel = 1
+    options.hardware_mapping = 'adafruit-hat'
+    options.drop_privileges = 0# DONT DROP PRIVS!!!
+
+    # Matrix & Canvas
+    matrix = RGBMatrix(options = options)
+    offset_canvas = matrix.CreateFrameCanvas()
+```
+
+und Screen. Der Screen ist breiter auf dem PC und zeigt links den Pygame-Bildschirm + Debug optionen. Rechts ist die Matrixrepresäntation.
+
+```Python
+# Setup screen for ALL GAMES
+screen = None
+if started_on_pi:
+    screen = pygame.display.set_mode((s.SCREEN_WIDTH, s.SCREEN_HEIGHT))
+else:
+    screen = pygame.display.set_mode((s.SCREEN_WIDTH*2, s.SCREEN_HEIGHT))
+pygame.display.set_caption("Startscreen")
+```
+Auswahl der Spiele. Übergabe für die Spiel-Funktionen sind die globalen Screen, Matrix und Canvas Variablen.
+```Python
+# Start selected Game
+        elif event.type == pygame.JOYBUTTONDOWN and event.button != 8:
+            if(select_box_x == 0 and select_box_y == 0):
+                flappy_bird_game(screen, matrix, offset_canvas)
+            elif(select_box_x == 0 and select_box_y == SCREEN_HALF):
+                snake_game(screen, matrix, offset_canvas)
+            elif(select_box_x == SCREEN_HALF and select_box_y == 0):
+                geometry_dash_game(screen, matrix, offset_canvas)
+            elif(select_box_x == SCREEN_HALF and select_box_y == SCREEN_HALF):
+                run = False
+```
+
+## FlappyBird (Modul)
+### FlappyBird.py
+Aufbau:  
+- Initialisiere Variablen
+- Haupt Gameloop
+  - Player Physiks
+  - Pillar Physics
+  - Edgecases
+  - Pillar kolision
+  - Score increment
+  - Event listeners
+  - Drawing  
+
+Die Funktionen sind in unterschiedliche Dateien verteilt. Die haupt Spielfunktion befindet sich in FlappBird.py
+```Python
+def flappy_bird_game(screen, matrix, offset_canvas):
+```
+### colors.py
+Hier werden Farben definiert
+### mapGeneration.py
+
+
 ## Aufgabenverteilung
 ### FlappyBird
 - Luca
