@@ -3,6 +3,8 @@ Wir als Gruppe ajlmn haben uns entschieden auf der 32x32 Matrix die Spiele Flapp
 GeometrieDash sowie Snake zu programmieren. Diese sind in den unter Ordnern mit entsprechenden
 Namen zu finden. Gespielt wird auf einem Raspberry PI 3 mit einem Joypad. Für Geometry Dash wird ein externes Soundsystem empfohlen.
 
+Repo: https://github.com/JD-GG/ajlmn-32x32LED-games
+
 ## Projektaufbau
 Die Datei Startscreen.py wird von dem Atostart-Service aufgerufen. Startscreen.py kann natürlich auch manuell gestartet werden.  
 
