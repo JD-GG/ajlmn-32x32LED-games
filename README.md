@@ -82,6 +82,7 @@ Aufbau:
   - Score increment
   - Event listeners
   - Drawing  
+  - draw_matrix
 
 Die Funktionen sind in unterschiedliche Dateien verteilt. Die haupt Spielfunktion befindet sich in FlappBird.py
 ```Python
@@ -117,6 +118,62 @@ def draw_hitboxes(screen, player_hitbox, pillar_pos_x, pillar_hitbox_top, pillar
 Zahlen von 1-9 in 2-Dimensionaler Darstellung
 ### settings.py
 Konstanten für FlappyBird
+
+## GeometryDash (Modul)
+### Main.py
+Aufbau:
+- Initialisiere Variablen
+- Außere Gameloop
+  - Musik start & stop
+  - Innere Gameloop
+    - Kollision
+	- Drawing & Gamelogik
+	- User Input
+	- Draw Score
+	- draw_matrix
+### collision.py
+Hier werden Kollisionen mit dem Boden, Todesobjekten und Blöcken verarbeitet.
+### drawing.py 
+Hier werden Spieler, Blöcke und die Prozentanzeige gezeichnet. Es befindet sich auch die von der Rechenleistung her aufwendigste Funktion in dieser Datei.
+```Python
+def drawObstical(screen)
+```
+### newSoundplayer.py
+Initialisiert, Startet und Stopt die Musik sowie die anderen Sounds. Nutzt den Konsolen-Befehl aplay und startet einen neuen Subprozess.
+```Python
+self.process = subprocess.Popen(["aplay", self.file_path])
+```
+### test.py
+Nur kleine test Funktionen, nichts relevantes für das Spiel.
+### userInput.py
+Regelt den userInput für Tastatur sowie controller. S/Select um in den Homescreen zu kommen, Space/ControllerTasten um zu Springen.
+### Variables.py
+Beherbergt Konstanten sowie globale Variabeln wie z.b. Die Map Parts und die Scorekonstanten
+
+## Snake (Modul)
+### Snake.py
+Aufbau:  
+- Initialisiere Variablen
+- Snake Class
+- Apple Class
+- Haupt Gameloop
+  - Click Events
+  - Aufrufen von Update Methoden von Snake und Apple für collisions
+  - Drawing
+  - remove apple when eaten
+  - draw_matrix
+
+Diese Funktion checkt ob die Snake tot ist innerhalb von der Snake Class
+```Python
+if self.dead:
+                self.x, self.y = BLOCK_SIZE, BLOCK_SIZE
+                self.head = pygame.Rect(self.x, self.y, BLOCK_SIZE, BLOCK_SIZE)
+                self.body = [pygame.Rect(self.x-BLOCK_SIZE, self.y, BLOCK_SIZE, BLOCK_SIZE)]
+                self.xdir = 1
+                self.ydir = 0
+                self.dead = False
+                apple = Apple()
+```
 
 ## Aufgabenverteilung
 ### FlappyBird
