@@ -90,7 +90,33 @@ def flappy_bird_game(screen, matrix, offset_canvas):
 ### colors.py
 Hier werden Farben definiert
 ### mapGeneration.py
-
+Bestimmung der zufälligen Positionen von den Pillars.
+### output.py
+Hier befinden sich allgemein genutzte Funktionen. Diese Funktion wird in jedem Modul genutzt um die Matrix an zu steuern.
+```Python
+def draw_matrix(screen, matrix, offset_canvas):
+    for y in range(32):
+        for x in range(32):
+            pos_x = x * s.PIXEL_WIDTH
+            pos_y = y * s.PIXEL_WIDTH
+            color = screen.get_at((pos_x, pos_y + s.DOWNWARD_PIXEL_PULL_OFFSET))# get color in format (r, g, b, t)            
+            offset_canvas.SetPixel(x, y, color[0], color[1], color[2])
+    return matrix.SwapOnVSync(offset_canvas)
+```
+Aber auch FlappyBird spezifische Funktionen.
+```Python
+def draw_hitboxes(screen, player_hitbox, pillar_pos_x, pillar_hitbox_top, pillar_hitbox_score, pillar_hitbox_bottom):
+    pygame.draw.rect(screen, (255, 0, 0), player_hitbox, 3)  # width = 3
+    for i in range(s.PILLAR_COUNT):
+        if pillar_pos_x[i] < s.SCREEN_WIDTH:
+            pygame.draw.rect(screen, (255, 0, 0), pillar_hitbox_top[i], 3)  # width = 3
+            pygame.draw.rect(screen, (255, 0, 0), pillar_hitbox_score[i], 3)  # width = 3
+            pygame.draw.rect(screen, (255, 0, 0), pillar_hitbox_bottom[i], 3)  # width = 3
+```
+### score.py
+Zahlen von 1-9 in 2-Dimensionaler Darstellung
+### settings.py
+Konstanten für FlappyBird
 
 ## Aufgabenverteilung
 ### FlappyBird
